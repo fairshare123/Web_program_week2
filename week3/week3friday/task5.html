@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: sans-serif;
+    padding-top: 70px;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #1e293b;
+    padding: 18px 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    z-index: 1000;
+  }
+
+  .logo {
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  .links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .links a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .links a:hover {
+    color: #14b8a6;
+  }
+
+  main {
+    min-height: 1500px;
+    padding: 30px;
+  }
+</style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo">Dipika</div>
+
+    <div class="links">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Skills</a>
+      <a href="#">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+    <h1>My Website</h1>
+    <p>Scroll down to see the fixed navigation bar.</p>
+  </main>
+
+</body>
+</html>

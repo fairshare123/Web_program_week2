@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<style>
+  :root {
+    --primary: #0f766e;
+    --accent: #14b8a6;
+    --bg: #f8fafc;
+    --text: #1e293b;
+    --space: 20px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: var(--space);
+    background: var(--bg);
+    color: var(--text);
+    font-family: sans-serif;
+  }
+
+  .card {
+    background: var(--bg);
+    border: 2px solid var(--accent);
+    padding: var(--space);
+    margin-bottom: var(--space);
+    border-radius: 10px;
+  }
+
+  h1 {
+    color: var(--primary);
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px var(--space);
+    border-radius: 6px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --primary: #5eead4;
+      --accent: #2dd4bf;
+      --bg: #0f172a;
+      --text: #f8fafc;
+      --space: 20px;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+  <h1>My Theme</h1>
+
+  <div class="card">
+    <h2>CSS Variables</h2>
+    <p>This page uses reusable CSS variables.</p>
+    <button>Click Me</button>
+  </div>
+
+</body>
+</html>

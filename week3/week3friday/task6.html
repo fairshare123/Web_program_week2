@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<style>
+  :root {
+    --bg: #f8fafc;
+    --card-bg: white;
+    --text: #1e293b;
+    --accent: #0f766e;
+    --space: 20px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 30px;
+    font-family: sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space);
+  }
+
+  .card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 10px;
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+  }
+
+  .card::before {
+    content: attr(data-icon);
+    margin-right: 10px;
+  }
+
+  .card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  @media (min-width: 640px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --accent: #2dd4bf;
+      --space: 20px;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+  <div class="grid">
+
+    <div class="card" data-icon="🌐">
+      HTML5 – Structure
+    </div>
+
+    <div class="card" data-icon="🎨">
+      CSS3 – Styling
+    </div>
+
+    <div class="card" data-icon="⚡">
+      JavaScript – Behaviour
+    </div>
+
+    <div class="card" data-icon="📐">
+      Flexbox – 1D Layout
+    </div>
+
+    <div class="card" data-icon="▦">
+      Grid – 2D Layout
+    </div>
+
+    <div class="card" data-icon="📱">
+      Responsive – Any Screen
+    </div>
+
+  </div>
+
+</body>
+</html>

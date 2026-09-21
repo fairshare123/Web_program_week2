@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Dipika's CSS Portfolio</title>
+
+<style>
+
+:root {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #1e293b;
+  --primary: #0f766e;
+  --accent: #14b8a6;
+  --muted: #64748b;
+  --space: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+
+/* Fixed Navigation */
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  background: #1e293b;
+  padding: 16px 30px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  z-index: 1000;
+}
+
+nav strong {
+  color: white;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--accent);
+}
+
+
+/* Hero Section */
+
+.hero {
+  margin-top: 60px;
+  padding: 90px 20px;
+  text-align: center;
+
+  animation: fadeIn 1s ease;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.hero p {
+  color: var(--muted);
+  font-size: 1.2rem;
+}
+
+
+/* Fade Animation */
+
+@keyframes fadeIn {
+
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+/* Sticky Section Heading */
+
+.sticky-heading {
+  position: sticky;
+  top: 60px;
+
+  background: var(--primary);
+  color: white;
+
+  padding: 15px;
+  text-align: center;
+
+  z-index: 10;
+}
+
+
+/* Skills Grid */
+
+.skills {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space);
+  padding: 30px;
+}
+
+.skill {
+  background: var(--card);
+  padding: 25px;
+  border-radius: 10px;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* Emoji before each skill */
+
+.skill::before {
+  content: "⭐";
+  margin-right: 10px;
+}
+
+
+/* Skill hover */
+
+.skill:hover {
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.skill h3 {
+  display: inline;
+}
+
+
+/* Responsive 3-column grid */
+
+@media (min-width: 640px) {
+
+  .skills {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+}
+
+
+/* Dark Mode */
+
+@media (prefers-color-scheme: dark) {
+
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #f8fafc;
+    --primary: #2dd4bf;
+    --accent: #5eead4;
+    --muted: #cbd5e1;
+    --space: 20px;
+  }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<!-- Navigation -->
+
+<nav>
+
+  <strong>Dipika</strong>
+
+  <div>
+    <a href="#">Home</a>
+    <a href="#">Skills</a>
+    <a href="#">About</a>
+  </div>
+
+</nav>
+
+
+<!-- Hero -->
+
+<section class="hero">
+
+  <h1>Hi, I'm Dipika</h1>
+
+  <p>
+    Computer Engineering Student
+  </p>
+
+</section>
+
+
+<!-- Sticky Heading -->
+
+<h2 class="sticky-heading">
+  My Skills
+</h2>
+
+
+<!-- Skills -->
+
+<section class="skills">
+
+  <div class="skill">
+    <h3>HTML</h3>
+    <p>Building structured web pages.</p>
+  </div>
+
+  <div class="skill">
+    <h3>CSS</h3>
+    <p>Creating responsive and attractive designs.</p>
+  </div>
+
+  <div class="skill">
+    <h3>JavaScript</h3>
+    <p>Adding interaction and functionality.</p>
+  </div>
+
+  <div class="skill">
+    <h3>React</h3>
+    <p>Building modern user interfaces.</p>
+  </div>
+
+  <div class="skill">
+    <h3>Python</h3>
+    <p>Programming and problem solving.</p>
+  </div>
+
+  <div class="skill">
+    <h3>GitHub</h3>
+    <p>Managing and sharing code.</p>
+  </div>
+
+</section>
+
+
+</body>
+</html>
