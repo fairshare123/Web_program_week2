@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>My CSS Portfolio</title>
+
+  <style>
+
+    /* 1. Reset */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+    }
+
+    /* 2. Navigation */
+
+    nav {
+      background: #1e293b;
+      color: white;
+      padding: 20px 40px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+
+    /* 3. Hero */
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+    }
+
+    .hero button {
+      background: #15803d;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+    }
+
+    /* 4. Skills */
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 40px;
+    }
+
+    .skill {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+    }
+
+    /* 5. Footer */
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #1e293b;
+      color: white;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <strong>My Portfolio</strong>
+
+    <div>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Hello, I'm Dipika</h1>
+    <p>Computer Engineering Student</p>
+    <button>View My Skills</button>
+  </section>
+
+  <section class="skills">
+
+    <div class="skill">
+      <h2>HTML</h2>
+      <p>Creating structured web pages.</p>
+    </div>
+
+    <div class="skill">
+      <h2>CSS</h2>
+      <p>Designing beautiful and responsive pages.</p>
+    </div>
+
+    <div class="skill">
+      <h2>JavaScript</h2>
+      <p>Adding interaction to websites.</p>
+    </div>
+
+  </section>
+
+  <footer>
+    <p>© 2026 My Portfolio</p>
+  </footer>
+
+</body>
+</html>
