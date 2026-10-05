@@ -23,20 +23,12 @@
             color: #134e4a;
         }
 
-        /* Navigation */
         nav {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-
             background: #0f766e;
             padding: 18px 8%;
-
             display: flex;
             justify-content: space-between;
             align-items: center;
-
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
         }
 
         .logo {
@@ -50,36 +42,30 @@
             text-decoration: none;
             margin-left: 25px;
             font-weight: bold;
-            transition: 0.3s;
         }
 
         nav a:hover {
             color: #99f6e4;
         }
 
-        /* Hero */
         .hero {
             min-height: 75vh;
-
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-
             text-align: center;
-            padding: 60px 20px;
-
+            padding: 50px 20px;
             background: linear-gradient(135deg, #ccfbf1, #f0fdfa);
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-size: 4rem;
             color: #115e59;
             margin-bottom: 15px;
         }
 
         .hero h2 {
-            font-size: 1.5rem;
             color: #0f766e;
             margin-bottom: 15px;
         }
@@ -87,162 +73,107 @@
         .hero p {
             max-width: 650px;
             color: #475569;
-            font-size: 1.1rem;
             line-height: 1.7;
         }
 
-        .hero-button {
+        .button {
+            display: inline-block;
             margin-top: 30px;
             padding: 14px 28px;
-
             background: #0f766e;
             color: white;
-
             text-decoration: none;
             border-radius: 30px;
-
             font-weight: bold;
-            transition: 0.3s;
         }
 
-        .hero-button:hover {
+        .button:hover {
             background: #115e59;
-            transform: translateY(-3px);
         }
 
-        /* Main */
         .container {
-            max-width: 1100px;
+            max-width: 1000px;
             margin: auto;
             padding: 70px 25px;
         }
 
-        .section-title {
+        .title {
             text-align: center;
             font-size: 2rem;
             margin-bottom: 15px;
-            color: #115e59;
         }
 
-        .section-description {
+        .description {
             text-align: center;
             color: #64748b;
             margin-bottom: 40px;
         }
 
-        /* Week cards */
         .weeks {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 25px;
         }
 
-        .week-card {
+        .week {
             background: white;
             padding: 35px;
             border-radius: 18px;
-
             text-decoration: none;
             color: #134e4a;
-
             box-shadow: 0 8px 25px rgba(15, 118, 110, 0.12);
-
             transition: 0.3s;
-            border: 2px solid transparent;
         }
 
-        .week-card:hover {
-            transform: translateY(-8px);
-            border-color: #14b8a6;
-            box-shadow: 0 15px 30px rgba(15, 118, 110, 0.2);
-        }
-
-        .week-number {
-            display: inline-block;
-
+        .week:hover {
+            transform: translateY(-7px);
             background: #ccfbf1;
+        }
+
+        .week span {
             color: #0f766e;
-
-            padding: 7px 14px;
-            border-radius: 20px;
-
-            font-size: 0.85rem;
             font-weight: bold;
-
-            margin-bottom: 15px;
         }
 
-        .week-card h3 {
+        .week h3 {
+            margin: 15px 0 10px;
             font-size: 1.5rem;
-            margin-bottom: 10px;
         }
 
-        .week-card p {
+        .week p {
             color: #64748b;
             line-height: 1.6;
         }
 
-        .arrow {
-            display: block;
-            margin-top: 20px;
-
-            color: #0f766e;
-            font-weight: bold;
-        }
-
-        /* About */
         .about {
+            margin-top: 60px;
             background: white;
-            border-radius: 20px;
             padding: 40px;
-            margin-top: 70px;
-
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border-radius: 18px;
+            text-align: center;
         }
 
         .about p {
+            max-width: 700px;
+            margin: 20px auto 0;
             color: #475569;
             line-height: 1.8;
-            text-align: center;
-            max-width: 750px;
-            margin: auto;
         }
 
-        /* Footer */
         footer {
             background: #134e4a;
             color: white;
             text-align: center;
-            padding: 30px 20px;
-            margin-top: 30px;
+            padding: 30px;
         }
 
-        footer p {
-            margin: 5px;
-        }
-
-        /* Mobile */
         @media (max-width: 700px) {
-
-            nav {
-                padding: 15px 20px;
-            }
-
-            nav a {
-                margin-left: 10px;
-                font-size: 0.85rem;
-            }
-
             .weeks {
                 grid-template-columns: 1fr;
             }
 
-            .hero {
-                min-height: 65vh;
-            }
-
-            .about {
-                padding: 25px;
+            .hero h1 {
+                font-size: 2.7rem;
             }
         }
     </style>
@@ -250,146 +181,100 @@
 
 <body>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">Dipika's Portfolio</div>
+<nav>
+    <div class="logo">Dipika's Portfolio</div>
 
-        <div>
-            <a href="#home">Home</a>
-            <a href="#weeks">Weeks</a>
-            <a href="#about">About</a>
-        </div>
-    </nav>
+    <div>
+        <a href="index.html">Home</a>
+        <a href="#weeks">Weeks</a>
+        <a href="#about">About</a>
+    </div>
+</nav>
 
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
+<section class="hero">
 
-        <h1>Hi, I'm Dipika 👋</h1>
+    <h1>Hi, I'm Dipika 👋</h1>
 
-        <h2>Computer Engineering Student</h2>
+    <h2>Computer Engineering Student</h2>
 
-        <p>
-            Welcome to my Web Development journey!
-            This website contains the projects and tasks I have completed
-            while learning HTML, CSS, JavaScript and web development.
-        </p>
+    <p>
+        Welcome to my Web Development journey!
+        Here you can explore the projects and tasks I completed
+        while learning HTML, CSS and JavaScript.
+    </p>
 
-        <a href="#weeks" class="hero-button">
-            Explore My Work ↓
+    <a href="#weeks" class="button">
+        Explore My Work ↓
+    </a>
+
+</section>
+
+
+<section class="container" id="weeks">
+
+    <h2 class="title">My Web Development Work</h2>
+
+    <p class="description">
+        Choose a week to explore my tasks and projects.
+    </p>
+
+    <div class="weeks">
+
+        <a href="week1.html" class="week">
+            <span>WEEK 01</span>
+            <h3>Week 1</h3>
+            <p>
+                Explore the tasks and exercises I completed during Week 1.
+            </p>
         </a>
 
-    </section>
+        <a href="week2.html" class="week">
+            <span>WEEK 02</span>
+            <h3>Week 2</h3>
+            <p>
+                Explore the tasks and exercises I completed during Week 2.
+            </p>
+        </a>
+
+        <a href="week3.html" class="week">
+            <span>WEEK 03</span>
+            <h3>Week 3</h3>
+            <p>
+                Explore the tasks and exercises I completed during Week 3.
+            </p>
+        </a>
+
+        <a href="week4.html" class="week">
+            <span>WEEK 04</span>
+            <h3>Week 4</h3>
+            <p>
+                Explore the tasks and exercises I completed during Week 4.
+            </p>
+        </a>
+
+    </div>
 
 
-    <!-- Weeks -->
-    <main class="container" id="weeks">
+    <div class="about" id="about">
 
-        <h2 class="section-title">My Web Development Work</h2>
+        <h2 class="title">About Me</h2>
 
-        <p class="section-description">
-            Choose a week to explore the projects and exercises I completed.
+        <p>
+            I am a Computer Engineering student interested in technology
+            and web development. This portfolio shows my progress and
+            projects throughout my Web Programming course.
         </p>
 
+    </div>
 
-        <div class="weeks">
-
-            <!-- Week 1 -->
-            <a href="week1/" class="week-card">
-
-                <span class="week-number">WEEK 01</span>
-
-                <h3>HTML Fundamentals</h3>
-
-                <p>
-                    My first steps into web development,
-                    learning the basics of HTML and webpage structure.
-                </p>
-
-                <span class="arrow">View Tasks →</span>
-
-            </a>
+</section>
 
 
-            <!-- Week 2 -->
-            <a href="week2/" class="week-card">
-
-                <span class="week-number">WEEK 02</span>
-
-                <h3>CSS & Styling</h3>
-
-                <p>
-                    Exploring CSS, layouts, colors, spacing,
-                    positioning and responsive webpage design.
-                </p>
-
-                <span class="arrow">View Tasks →</span>
-
-            </a>
-
-
-            <!-- Week 3 -->
-            <a href="week3/" class="week-card">
-
-                <span class="week-number">WEEK 03</span>
-
-                <h3>JavaScript</h3>
-
-                <p>
-                    Learning JavaScript and creating interactive
-                    webpages using events and DOM manipulation.
-                </p>
-
-                <span class="arrow">View Tasks →</span>
-
-            </a>
-
-
-            <!-- Week 4 -->
-            <a href="week4/" class="week-card">
-
-                <span class="week-number">WEEK 04</span>
-
-                <h3>Advanced Web Development</h3>
-
-                <p>
-                    Combining HTML, CSS and JavaScript to build
-                    more interactive and advanced projects.
-                </p>
-
-                <span class="arrow">View Tasks →</span>
-
-            </a>
-
-        </div>
-
-
-        <!-- About -->
-        <section class="about" id="about">
-
-            <h2 class="section-title">About Me</h2>
-
-            <p>
-                I am a Computer Engineering student interested in technology
-                and web development. This portfolio represents my progress,
-                practice and projects throughout my web programming course.
-                Each week contains the tasks and projects I completed as I
-                learned new concepts.
-            </p>
-
-        </section>
-
-    </main>
-
-
-    <!-- Footer -->
-    <footer>
-
-        <p>💻 Dipika Aryal</p>
-
-        <p>Web Development Portfolio © 2026</p>
-
-    </footer>
+<footer>
+    <p>💻 Dipika Aryal</p>
+    <p>Web Development Portfolio © 2026</p>
+</footer>
 
 </body>
 </html>
