@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<style>
+  body {
+    font-family: system-ui;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .done {
+    background: #16a34a !important;
+  }
+
+  button {
+    padding: 14px 32px;
+    font-size: 16px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+</style>
+</head>
+
+<body>
+
+<h2>Click Counter</h2>
+
+<button id="clicker">Click me!</button>
+
+<p id="counter">Clicks: 0</p>
+<p id="message"></p>
+
+<script>
+  const button = document.querySelector("#clicker");
+  const counter = document.querySelector("#counter");
+  const message = document.querySelector("#message");
+
+  let clicks = 0;
+
+  button.addEventListener("click", function() {
+    clicks++;
+
+    counter.textContent = "Clicks: " + clicks;
+
+    if (clicks === 5) {
+      button.classList.add("done");
+      message.textContent = "Congratulations! You reached 5 clicks! 🎉";
+    }
+  });
+</script>
+
+</body>
+</html>

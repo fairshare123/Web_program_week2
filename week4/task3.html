@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family:system-ui;padding:20px;max-width:400px;margin:auto">
+
+<style>
+  h2 {
+    color: #1a56db;
+  }
+
+  .add-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 2px solid #c8d4f0;
+    border-radius: 8px;
+  }
+
+  button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  #add {
+    background: #1a56db;
+    color: white;
+  }
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 8px;
+    background: #f1f5f9;
+    border-radius: 8px;
+  }
+
+  .delete {
+    background: #ef4444;
+    color: white;
+  }
+</style>
+
+<h2>My To-Do List</h2>
+
+<div class="add-row">
+  <input id="taskInput" placeholder="Add a task...">
+  <button id="add">Add</button>
+</div>
+
+<ul id="taskList"></ul>
+
+<script>
+const input = document.querySelector("#taskInput");
+const addButton = document.querySelector("#add");
+const taskList = document.querySelector("#taskList");
+
+function addTask() {
+  const text = input.value.trim();
+
+  if (text === "") {
+    return;
+  }
+
+  const item = document.createElement("li");
+  const taskText = document.createElement("span");
+  const deleteButton = document.createElement("button");
+
+  taskText.textContent = text;
+  deleteButton.textContent = "X";
+  deleteButton.classList.add("delete");
+
+  item.appendChild(taskText);
+  item.appendChild(deleteButton);
+
+  taskList.appendChild(item);
+
+  input.value = "";
+}
+
+addButton.addEventListener("click", addTask);
+
+input.addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    addTask();
+  }
+});
+
+taskList.addEventListener("click", function(e) {
+  if (e.target.classList.contains("delete")) {
+    e.target.parentElement.remove();
+  }
+});
+</script>
+
+</body>
+</html>

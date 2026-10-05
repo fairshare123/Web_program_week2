@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family:system-ui;padding:20px;max-width:500px;margin:auto">
+
+<style>
+  h2 {
+    color: #1a56db;
+  }
+
+  #search {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 2px solid #c8d4f0;
+    border-radius: 8px;
+  }
+
+  .student {
+    padding: 12px;
+    margin-bottom: 8px;
+    background: #f1f5f9;
+    border-radius: 8px;
+  }
+
+  mark {
+    background: #fde68a;
+  }
+</style>
+
+<h2>Student Search</h2>
+
+<input id="search" placeholder="Search for a student...">
+
+<div class="student">Dipika Aryal</div>
+<div class="student">Anisha Sharma</div>
+<div class="student">Rahul Thapa</div>
+<div class="student">Sujan Karki</div>
+<div class="student">Priya Gurung</div>
+<div class="student">Aarav Joshi</div>
+
+<script>
+const search = document.querySelector("#search");
+const students = document.querySelectorAll(".student");
+
+search.addEventListener("input", function(e) {
+  const term = e.target.value.toLowerCase();
+
+  students.forEach(function(student) {
+    const name = student.textContent;
+    const lowerName = name.toLowerCase();
+
+    if (lowerName.includes(term)) {
+      student.style.display = "";
+
+      if (term !== "") {
+        const start = lowerName.indexOf(term);
+        const end = start + term.length;
+
+        student.innerHTML =
+          name.substring(0, start) +
+          "<mark>" +
+          name.substring(start, end) +
+          "</mark>" +
+          name.substring(end);
+      } else {
+        student.textContent = name;
+      }
+
+    } else {
+      student.style.display = "none";
+    }
+  });
+});
+</script>
+
+</body>
+</html>
