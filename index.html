@@ -4,17 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Dipika Aryal | Web Development Portfolio</title>
+    <title>Dipika Aryal | Web Development</title>
 
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
         }
 
         body {
@@ -49,13 +45,8 @@
         }
 
         .hero {
-            min-height: 75vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             text-align: center;
-            padding: 50px 20px;
+            padding: 90px 20px;
             background: linear-gradient(135deg, #ccfbf1, #f0fdfa);
         }
 
@@ -72,23 +63,9 @@
 
         .hero p {
             max-width: 650px;
+            margin: auto;
             color: #475569;
             line-height: 1.7;
-        }
-
-        .button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 14px 28px;
-            background: #0f766e;
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-        }
-
-        .button:hover {
-            background: #115e59;
         }
 
         .container {
@@ -109,40 +86,76 @@
             margin-bottom: 40px;
         }
 
+        /* WEEK BUTTONS */
+
         .weeks {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
         }
 
-        .week {
+        .week-button {
+            border: none;
             background: white;
-            padding: 35px;
-            border-radius: 18px;
-            text-decoration: none;
+            padding: 30px;
+            border-radius: 16px;
+            cursor: pointer;
             color: #134e4a;
-            box-shadow: 0 8px 25px rgba(15, 118, 110, 0.12);
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
             transition: 0.3s;
         }
 
-        .week:hover {
-            transform: translateY(-7px);
+        .week-button:hover {
             background: #ccfbf1;
+            transform: translateY(-5px);
         }
 
-        .week span {
+        /* TASK AREA */
+
+        .task-section {
+            display: none;
+            margin-top: 50px;
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .task-section h2 {
+            margin-bottom: 25px;
+            color: #115e59;
+        }
+
+        .tasks {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .task {
+            display: block;
+            padding: 18px;
+            background: #f0fdfa;
             color: #0f766e;
+            text-decoration: none;
+            border-radius: 10px;
             font-weight: bold;
+            transition: 0.3s;
         }
 
-        .week h3 {
-            margin: 15px 0 10px;
-            font-size: 1.5rem;
+        .task:hover {
+            background: #ccfbf1;
+            transform: translateX(5px);
         }
 
-        .week p {
-            color: #64748b;
-            line-height: 1.6;
+        .back {
+            display: inline-block;
+            margin-top: 25px;
+            color: #0f766e;
+            cursor: pointer;
+            font-weight: bold;
         }
 
         .about {
@@ -161,6 +174,7 @@
         }
 
         footer {
+            margin-top: 50px;
             background: #134e4a;
             color: white;
             text-align: center;
@@ -168,7 +182,12 @@
         }
 
         @media (max-width: 700px) {
+
             .weeks {
+                grid-template-columns: 1fr;
+            }
+
+            .tasks {
                 grid-template-columns: 1fr;
             }
 
@@ -181,100 +200,203 @@
 
 <body>
 
-<nav>
-    <div class="logo">Dipika's Portfolio</div>
+    <!-- NAVIGATION -->
 
-    <div>
-        <a href="index.html">Home</a>
-        <a href="#weeks">Weeks</a>
-        <a href="#about">About</a>
-    </div>
-</nav>
+    <nav>
+        <div class="logo">Dipika's Portfolio</div>
 
-
-<section class="hero">
-
-    <h1>Hi, I'm Dipika 👋</h1>
-
-    <h2>Computer Engineering Student</h2>
-
-    <p>
-        Welcome to my Web Development journey!
-        Here you can explore the projects and tasks I completed
-        while learning HTML, CSS and JavaScript.
-    </p>
-
-    <a href="#weeks" class="button">
-        Explore My Work ↓
-    </a>
-
-</section>
+        <div>
+            <a href="#home">Home</a>
+            <a href="#weeks">Weeks</a>
+            <a href="#about">About</a>
+        </div>
+    </nav>
 
 
-<section class="container" id="weeks">
+    <!-- HERO -->
 
-    <h2 class="title">My Web Development Work</h2>
+    <section class="hero" id="home">
 
-    <p class="description">
-        Choose a week to explore my tasks and projects.
-    </p>
+        <h1>Hi, I'm Dipika 👋</h1>
 
-    <div class="weeks">
-
-        <a href="week1.html" class="week">
-            <span>WEEK 01</span>
-            <h3>Week 1</h3>
-            <p>
-                Explore the tasks and exercises I completed during Week 1.
-            </p>
-        </a>
-
-        <a href="week2.html" class="week">
-            <span>WEEK 02</span>
-            <h3>Week 2</h3>
-            <p>
-                Explore the tasks and exercises I completed during Week 2.
-            </p>
-        </a>
-
-        <a href="week3.html" class="week">
-            <span>WEEK 03</span>
-            <h3>Week 3</h3>
-            <p>
-                Explore the tasks and exercises I completed during Week 3.
-            </p>
-        </a>
-
-        <a href="week4.html" class="week">
-            <span>WEEK 04</span>
-            <h3>Week 4</h3>
-            <p>
-                Explore the tasks and exercises I completed during Week 4.
-            </p>
-        </a>
-
-    </div>
-
-
-    <div class="about" id="about">
-
-        <h2 class="title">About Me</h2>
+        <h2>Computer Engineering Student</h2>
 
         <p>
-            I am a Computer Engineering student interested in technology
-            and web development. This portfolio shows my progress and
-            projects throughout my Web Programming course.
+            Welcome to my Web Development journey!
+            Explore the tasks and projects I completed
+            throughout my Web Programming course.
         </p>
 
-    </div>
-
-</section>
+    </section>
 
 
-<footer>
-    <p>💻 Dipika Aryal</p>
-    <p>Web Development Portfolio © 2026</p>
-</footer>
+    <!-- WEEKS -->
+
+    <section class="container" id="weeks">
+
+        <h2 class="title">My Web Development Work</h2>
+
+        <p class="description">
+            Choose a week to see the tasks I completed.
+        </p>
+
+
+        <div class="weeks">
+
+            <!-- WEEK 2 -->
+
+            <button class="week-button" onclick="showWeek('week2')">
+                Week 2
+            </button>
+
+
+            <!-- WEEK 3 -->
+
+            <button class="week-button" onclick="showWeek('week3')">
+                Week 3
+            </button>
+
+
+            <!-- WEEK 4 -->
+
+            <button class="week-button" onclick="showWeek('week4')">
+                Week 4
+            </button>
+
+        </div>
+
+
+        <!-- WEEK 2 TASKS -->
+
+        <div class="task-section" id="week2">
+
+            <h2>Week 2 Tasks</h2>
+
+            <div class="tasks">
+
+                <a class="task" href="week2/task1.html">Task 1</a>
+                <a class="task" href="week2/task2.html">Task 2</a>
+                <a class="task" href="week2/task3.html">Task 3</a>
+                <a class="task" href="week2/task4.html">Task 4</a>
+                <a class="task" href="week2/task5.html">Task 5</a>
+                <a class="task" href="week2/task6.html">Task 6</a>
+                <a class="task" href="week2/task7.html">Task 7</a>
+                <a class="task" href="week2/task8.html">Task 8</a>
+
+            </div>
+
+            <div class="back" onclick="hideWeeks()">
+                ← Back to Weeks
+            </div>
+
+        </div>
+
+
+        <!-- WEEK 3 TASKS -->
+
+        <div class="task-section" id="week3">
+
+            <h2>Week 3 Tasks</h2>
+
+            <div class="tasks">
+
+                <a class="task" href="week3/task1.html">Task 1</a>
+                <a class="task" href="week3/task2.html">Task 2</a>
+                <a class="task" href="week3/task3.html">Task 3</a>
+                <a class="task" href="week3/task4.html">Task 4</a>
+                <a class="task" href="week3/task5.html">Task 5</a>
+                <a class="task" href="week3/task6.html">Task 6</a>
+                <a class="task" href="week3/task7.html">Task 7</a>
+                <a class="task" href="week3/task8.html">Task 8</a>
+
+            </div>
+
+            <div class="back" onclick="hideWeeks()">
+                ← Back to Weeks
+            </div>
+
+        </div>
+
+
+        <!-- WEEK 4 TASKS -->
+
+        <div class="task-section" id="week4">
+
+            <h2>Week 4 Tasks</h2>
+
+            <div class="tasks">
+
+                <a class="task" href="week4/task1.html">Task 1</a>
+                <a class="task" href="week4/task2.html">Task 2</a>
+                <a class="task" href="week4/task3.html">Task 3</a>
+                <a class="task" href="week4/task4.html">Task 4</a>
+                <a class="task" href="week4/task5.html">Task 5</a>
+                <a class="task" href="week4/task6.html">Task 6</a>
+                <a class="task" href="week4/task7.html">Task 7</a>
+                <a class="task" href="week4/task8.html">Task 8</a>
+
+            </div>
+
+            <div class="back" onclick="hideWeeks()">
+                ← Back to Weeks
+            </div>
+
+        </div>
+
+
+        <!-- ABOUT -->
+
+        <div class="about" id="about">
+
+            <h2 class="title">About Me</h2>
+
+            <p>
+                I am a Computer Engineering student interested in
+                technology and web development. This portfolio shows
+                my progress and projects throughout my Web Programming course.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+        <p>💻 Dipika Aryal</p>
+        <p>Web Development Portfolio © 2026</p>
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        function showWeek(week) {
+
+            document.querySelectorAll(".task-section").forEach(function(section) {
+                section.style.display = "none";
+            });
+
+            document.getElementById(week).style.display = "block";
+
+            document.getElementById(week).scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+
+
+        function hideWeeks() {
+
+            document.querySelectorAll(".task-section").forEach(function(section) {
+                section.style.display = "none";
+            });
+
+            document.getElementById("weeks").scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+
+    </script>
 
 </body>
 </html>
