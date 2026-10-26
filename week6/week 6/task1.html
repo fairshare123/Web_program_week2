@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Week 6 | Random Joke Fetcher</title>
+
+    <style>
+        /* General page styling */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f0fdfa;
+            color: #23413e;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 18px 7%;
+            border-bottom: 1px solid #d5eeea;
+        }
+
+        header a {
+            color: #134e4a;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        main {
+            max-width: 850px;
+            width: 90%;
+            margin: 40px auto;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #ccfbf1;
+            color: #134e4a;
+            padding: 6px 13px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        h1,
+        h2 {
+            color: #134e4a;
+        }
+
+        h1 {
+            font-size: clamp(32px, 5vw, 43px);
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .intro {
+            color: #647875;
+            margin-bottom: 28px;
+        }
+
+        /* Main joke card */
+        .card {
+            background: #ffffff;
+            border: 1px solid #d5eeea;
+            border-radius: 18px;
+            padding: 26px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 24px rgba(15, 118, 110, 0.06);
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .small-text {
+            color: #647875;
+            font-size: 14px;
+        }
+
+        /* Buttons */
+        button {
+            background: #0f766e;
+            color: #ffffff;
+            border: none;
+            border-radius: 9px;
+            padding: 12px 17px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        button:hover {
+            background: #134e4a;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        button.secondary {
+            background: #ccfbf1;
+            color: #134e4a;
+        }
+
+        button.secondary:hover {
+            background: #5eead4;
+            color: #134e4a;
+        }
+
+        button.delete-button {
+            background: #fff1f2;
+            color: #be123c;
+        }
+
+        button.delete-button:hover {
+            background: #ffe4e6;
+            color: #9f1239;
+        }
+
+        /* Joke display */
+        .joke-box {
+            background: #f0fdfa;
+            border-left: 4px solid #14b8a6;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 22px;
+        }
+
+        .joke-label {
+            color: #0f766e;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        #setup {
+            color: #134e4a;
+            font-size: 19px;
+            font-weight: bold;
+            margin-top: 8px;
+            overflow-wrap: anywhere;
+        }
+
+        #punchline {
+            color: #0f766e;
+            font-size: 17px;
+            margin-bottom: 0;
+            overflow-wrap: anywhere;
+        }
+
+        /* Loading spinner */
+        .loading-area {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 5px solid #ccfbf1;
+            border-top-color: #0f766e;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 14px;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Status messages */
+        .status {
+            margin-top: 16px;
+            color: #647875;
+            overflow-wrap: anywhere;
+        }
+
+        .error-message {
+            background: #fff1f2;
+            color: #9f1239;
+            border: 1px solid #fecdd3;
+            border-radius: 9px;
+            padding: 12px;
+            margin-top: 15px;
+        }
+
+        .success-message {
+            color: #0f766e;
+        }
+
+        /* Favorite jokes */
+        .favorite-item {
+            padding: 17px 0;
+            border-bottom: 1px solid #d5eeea;
+        }
+
+        .favorite-item:last-child {
+            border-bottom: none;
+        }
+
+        .favorite-setup {
+            color: #134e4a;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        .favorite-punchline {
+            color: #647875;
+            overflow-wrap: anywhere;
+        }
+
+        .favorite-count {
+            color: #647875;
+            font-size: 14px;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #0f766e;
+            font-weight: bold;
+            text-decoration: none;
+            margin-bottom: 30px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 22px;
+            color: #647875;
+            border-top: 1px solid #d5eeea;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                padding: 19px;
+            }
+
+            #setup {
+                font-size: 17px;
+            }
+
+            .button-row button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="../index.html">← My Web Programming Portfolio</a>
+    </header>
+
+    <main>
+
+        <span class="tag">WEEK 6 · FETCH API & ASYNC/AWAIT</span>
+
+        <h1>Random Joke Fetcher</h1>
+
+        <p class="intro">
+            Need a little laugh while studying? Discover random jokes
+            from an online API, and save your favorite ones to enjoy again!
+        </p>
+
+        <!-- Random Joke Section -->
+        <section class="card">
+
+            <h2>Today's Joke</h2>
+
+            <p class="small-text">
+                Click the button below to fetch a new joke.
+            </p>
+
+            <button id="jokeButton" type="button" onclick="loadJoke()">
+                Tell Me a Joke!
+            </button>
+
+            <!-- Loading message and spinner -->
+            <div id="loadingArea" class="loading-area hidden"
+                 role="status" aria-live="polite">
+
+                <div class="spinner" aria-hidden="true"></div>
+
+                <p>Loading... Please wait!</p>
+
+            </div>
+
+            <!-- Joke setup and punchline -->
+            <div id="jokeBox" class="joke-box hidden">
+
+                <p class="joke-label">Setup</p>
+
+                <p id="setup"></p>
+
+                <p class="joke-label">Punchline</p>
+
+                <p id="punchline"></p>
+
+            </div>
+
+            <!-- Error and success messages -->
+            <div id="errorMessage" class="error-message hidden"
+                 role="alert"></div>
+
+            <p id="statusMessage" class="status" aria-live="polite">
+                Ready for a joke? Click the button above!
+            </p>
+
+            <button id="favoriteButton"
+                    type="button"
+                    class="secondary"
+                    onclick="saveFavorite()"
+                    disabled>
+                ♥ Save Favourite
+            </button>
+
+        </section>
+
+        <!-- Favorite Jokes Section -->
+        <section class="card">
+
+            <h2>My Favourite Jokes ♥</h2>
+
+            <p class="small-text">
+                Jokes you save will be stored in this browser.
+                They should remain here even after you refresh the page.
+            </p>
+
+            <p id="favoriteCount" class="favorite-count">
+                0 saved jokes
+            </p>
+
+            <div id="favoritesList">
+                <p class="status">
+                    You haven't saved any jokes yet.
+                </p>
+            </div>
+
+        </section>
+
+        <a class="back-link" href="../index.html">
+            ← Back to My Portfolio
+        </a>
+
+    </main>
+
+    <footer>
+        Week 6 · Web Programming · JavaScript & Fetch API
+    </footer>
+
+    <script>
+        // API URL
+        const API_URL =
+    "https://official-joke-api.appspot.com/random_joke";
+
+        // Local storage key
+        const STORAGE_KEY = "week6FavoriteJokes";
+
+        // Store the joke currently displayed
+        let currentJoke = null;
+
+        // Get HTML elements
+        const jokeButton = document.getElementById("jokeButton");
+        const favoriteButton = document.getElementById("favoriteButton");
+        const loadingArea = document.getElementById("loadingArea");
+        const jokeBox = document.getElementById("jokeBox");
+        const errorMessage = document.getElementById("errorMessage");
+        const statusMessage = document.getElementById("statusMessage");
+        const favoritesList = document.getElementById("favoritesList");
+        const favoriteCount = document.getElementById("favoriteCount");
+
+
+        // TASK 1: Fetch a random joke
+        async function loadJoke() {
+
+            // TASK 2: Show the loading message and spinner
+            jokeButton.disabled = true;
+            favoriteButton.disabled = true;
+
+            loadingArea.classList.remove("hidden");
+            jokeBox.classList.add("hidden");
+            errorMessage.classList.add("hidden");
+
+            statusMessage.textContent = "";
+
+            // Clear the previous joke while loading
+            currentJoke = null;
+
+            try {
+
+                // Send a request to the API
+                const response = await fetch(API_URL);
+
+                // TASK 3: Check for HTTP errors
+                if (!response.ok) {
+                    throw new Error(
+                        "The server returned an error: " + response.status
+                    );
+                }
+
+                // Convert the response into JavaScript data
+                const data = await response.json();
+
+                // Check that the expected joke fields exist
+                if (
+                    !data ||
+                    typeof data.setup !== "string" ||
+                    typeof data.punchline !== "string"
+                ) {
+                    throw new Error("The joke data is incomplete.");
+                }
+
+                // Store the current joke
+                currentJoke = {
+                    id: data.id,
+                    setup: data.setup,
+                    punchline: data.punchline
+                };
+
+                // Display the setup and punchline separately
+                document.getElementById("setup").textContent =
+                    currentJoke.setup;
+
+                document.getElementById("punchline").textContent =
+                    currentJoke.punchline;
+
+                jokeBox.classList.remove("hidden");
+
+                favoriteButton.disabled = false;
+
+                statusMessage.textContent =
+                    "Here's your joke! Hope it makes you smile.";
+
+                statusMessage.classList.add("success-message");
+
+            } catch (error) {
+
+                // Friendly error handling
+                currentJoke = null;
+
+                errorMessage.textContent =
+                    "Oops! We couldn't load a joke right now. " +
+                    "Please check your internet connection and try again.";
+
+                errorMessage.classList.remove("hidden");
+
+                statusMessage.textContent = "";
+
+                // Helpful for debugging
+                console.error("Error loading joke:", error);
+
+            } finally {
+
+                // Always hide the spinner when the request finishes
+                loadingArea.classList.add("hidden");
+
+                jokeButton.disabled = false;
+            }
+        }
+
+
+        // Read saved favorites from localStorage
+        function getFavorites() {
+
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+
+                if (!saved) {
+                    return [];
+                }
+
+                const favorites = JSON.parse(saved);
+
+                return Array.isArray(favorites) ? favorites : [];
+
+            } catch (error) {
+                return [];
+            }
+        }
+
+
+        // TASK 4: Save the current joke to localStorage
+        function saveFavorite() {
+
+            if (!currentJoke) {
+                statusMessage.textContent =
+                    "Please load a joke before saving it.";
+                return;
+            }
+
+            const favorites = getFavorites();
+
+            // Avoid saving the same joke twice
+            const alreadySaved = favorites.some(function(joke) {
+                return joke.id === currentJoke.id;
+            });
+
+            if (alreadySaved) {
+                statusMessage.textContent =
+                    "You've already saved this joke!";
+                return;
+            }
+
+            favorites.push(currentJoke);
+
+            try {
+
+                localStorage.setItem(
+                    STORAGE_KEY,
+                    JSON.stringify(favorites)
+                );
+
+                statusMessage.textContent =
+                    "Joke saved to your favourites! ♥";
+
+                statusMessage.classList.add("success-message");
+
+                displayFavorites();
+
+            } catch (error) {
+
+                statusMessage.textContent =
+                    "Sorry, your browser couldn't save this joke.";
+
+                console.error("Error saving favorite:", error);
+            }
+        }
+
+
+        // Display all saved favorites
+        function displayFavorites() {
+
+            const favorites = getFavorites();
+
+            favoritesList.replaceChildren();
+
+            favoriteCount.textContent =
+                `${favorites.length} saved joke${favorites.length === 1 ? "" : "s"}`;
+
+            if (favorites.length === 0) {
+
+                const emptyMessage = document.createElement("p");
+
+                emptyMessage.className = "status";
+
+                emptyMessage.textContent =
+                    "You haven't saved any jokes yet.";
+
+                favoritesList.appendChild(emptyMessage);
+
+                return;
+            }
+
+            favorites.forEach(function(joke, index) {
+
+                const item = document.createElement("article");
+
+                item.className = "favorite-item";
+
+                const setup = document.createElement("p");
+
+                setup.className = "favorite-setup";
+
+                setup.textContent =
+                    `${index + 1}. ${joke.setup}`;
+
+                const punchline = document.createElement("p");
+
+                punchline.className = "favorite-punchline";
+
+                punchline.textContent = joke.punchline;
+
+                const removeButton = document.createElement("button");
+
+                removeButton.type = "button";
+                removeButton.className = "delete-button";
+                removeButton.textContent = "Remove Favourite";
+
+                removeButton.addEventListener("click", function() {
+                    removeFavorite(joke);
+                });
+
+                item.appendChild(setup);
+                item.appendChild(punchline);
+                item.appendChild(removeButton);
+
+                favoritesList.appendChild(item);
+            });
+        }
+
+
+        // Remove a saved favorite
+        function removeFavorite(jokeToRemove) {
+
+            const favorites = getFavorites();
+
+            const updatedFavorites = favorites.filter(function(joke) {
+
+                // Compare both fields in case an API joke has no ID
+                return !(
+                    joke.id === jokeToRemove.id &&
+                    joke.setup === jokeToRemove.setup &&
+                    joke.punchline === jokeToRemove.punchline
+                );
+            });
+
+            try {
+
+                localStorage.setItem(
+                    STORAGE_KEY,
+                    JSON.stringify(updatedFavorites)
+                );
+
+                displayFavorites();
+
+                statusMessage.textContent =
+                    "Favourite removed successfully.";
+
+                statusMessage.classList.add("success-message");
+
+            } catch (error) {
+
+                statusMessage.textContent =
+                    "Sorry, we couldn't remove that favourite.";
+            }
+        }
+
+
+        // Display saved favorites when the page opens
+        displayFavorites();
+
+    </script>
+
+</body>
+</html>
