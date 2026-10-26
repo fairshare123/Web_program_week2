@@ -158,21 +158,6 @@
             font-weight: bold;
         }
 
-        .about {
-            margin-top: 60px;
-            background: white;
-            padding: 40px;
-            border-radius: 18px;
-            text-align: center;
-        }
-
-        .about p {
-            max-width: 700px;
-            margin: 20px auto 0;
-            color: #475569;
-            line-height: 1.8;
-        }
-
         footer {
             margin-top: 50px;
             background: #134e4a;
@@ -182,7 +167,6 @@
         }
 
         @media (max-width: 700px) {
-
             .weeks {
                 grid-template-columns: 1fr;
             }
@@ -193,6 +177,15 @@
 
             .hero h1 {
                 font-size: 2.7rem;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            nav a {
+                margin-left: 10px;
             }
         }
     </style>
@@ -208,7 +201,6 @@
         <div>
             <a href="#home">Home</a>
             <a href="#weeks">Weeks</a>
-            <a href="#about">About</a>
         </div>
     </nav>
 
@@ -243,24 +235,24 @@
 
         <div class="weeks">
 
-            <!-- WEEK 2 -->
-
             <button class="week-button" onclick="showWeek('week2')">
                 Week 2
             </button>
-
-
-            <!-- WEEK 3 -->
 
             <button class="week-button" onclick="showWeek('week3')">
                 Week 3
             </button>
 
-
-            <!-- WEEK 4 -->
-
             <button class="week-button" onclick="showWeek('week4')">
                 Week 4
+            </button>
+
+            <button class="week-button" onclick="showWeek('week5')">
+                Week 5
+            </button>
+
+            <button class="week-button" onclick="showWeek('week6')">
+                Week 6
             </button>
 
         </div>
@@ -273,7 +265,6 @@
             <h2>Week 2 Tasks</h2>
 
             <div class="tasks">
-
                 <a class="task" href="week2/task1.html">Task 1</a>
                 <a class="task" href="week2/task2.html">Task 2</a>
                 <a class="task" href="week2/task3.html">Task 3</a>
@@ -282,12 +273,9 @@
                 <a class="task" href="week2/task6.html">Task 6</a>
                 <a class="task" href="week2/task7.html">Task 7</a>
                 <a class="task" href="week2/task8.html">Task 8</a>
-
             </div>
 
-            <div class="back" onclick="hideWeeks()">
-                ← Back to Weeks
-            </div>
+            <div class="back" onclick="hideWeeks()">← Back to Weeks</div>
 
         </div>
 
@@ -299,7 +287,6 @@
             <h2>Week 3 Tasks</h2>
 
             <div class="tasks">
-
                 <a class="task" href="week3/task1.html">Task 1</a>
                 <a class="task" href="week3/task2.html">Task 2</a>
                 <a class="task" href="week3/task3.html">Task 3</a>
@@ -308,12 +295,9 @@
                 <a class="task" href="week3/task6.html">Task 6</a>
                 <a class="task" href="week3/task7.html">Task 7</a>
                 <a class="task" href="week3/task8.html">Task 8</a>
-
             </div>
 
-            <div class="back" onclick="hideWeeks()">
-                ← Back to Weeks
-            </div>
+            <div class="back" onclick="hideWeeks()">← Back to Weeks</div>
 
         </div>
 
@@ -325,22 +309,67 @@
             <h2>Week 4 Tasks</h2>
 
             <div class="tasks">
-
                 <a class="task" href="week4/task1.html">Task 1</a>
                 <a class="task" href="week4/task2.html">Task 2</a>
                 <a class="task" href="week4/task3.html">Task 3</a>
                 <a class="task" href="week4/task4.html">Task 4</a>
             </div>
 
-            <div class="back" onclick="hideWeeks()">
-                ← Back to Weeks
-            </div>
+            <div class="back" onclick="hideWeeks()">← Back to Weeks</div>
 
         </div>
 
 
+        <!-- WEEK 5 TASKS -->
+
+        <div class="task-section" id="week5">
+
+            <h2>Week 5 Tasks</h2>
+
+            <div class="tasks">
+                <a class="task" href="week5/js-basics.html">
+                    Task 1 — JavaScript Basics
+                </a>
+
+                <a class="task" href="week5/counter.html">
+                    Task 2 — JavaScript Counter
+                </a>
+
+                <a class="task" href="week5/study-buddy.html">
+                    Task 3 — My Own Project: Study Buddy
+                </a>
+            </div>
+
+            <div class="back" onclick="hideWeeks()">← Back to Weeks</div>
+
+        </div>
+
+
+        <!-- WEEK 6 TASKS -->
+
+        <div class="task-section" id="week6">
+
+            <h2>Week 6 Tasks</h2>
+
+            <div class="tasks">
+                <a class="task" href="week6/task1.html">
+                    Task 1 — Random Joke Fetcher
+                </a>
+            </div>
+
+            <p style="margin-top: 20px; color: #64748b; line-height: 1.7;">
+                Fetch random jokes, display loading feedback, handle errors,
+                and save your favorite jokes using localStorage.
+            </p>
+
+            <div class="back" onclick="hideWeeks()">← Back to Weeks</div>
+
+        </div>
+
     </section>
 
+
+    <!-- FOOTER -->
 
     <footer>
         <p>💻 Dipika Aryal</p>
