@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Week 6 Task 2 | API Explorer Hub</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f0fdfa;
+            color: #23413e;
+            line-height: 1.6;
+        }
+
+        header {
+            background: white;
+            padding: 18px 7%;
+            border-bottom: 1px solid #d5eeea;
+        }
+
+        header a {
+            color: #134e4a;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        main {
+            max-width: 1100px;
+            width: 92%;
+            margin: 40px auto;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #ccfbf1;
+            color: #134e4a;
+            padding: 6px 13px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        h1, h2, h3 {
+            color: #134e4a;
+        }
+
+        h1 {
+            font-size: clamp(30px, 5vw, 43px);
+            line-height: 1.2;
+            margin: 15px 0;
+        }
+
+        .intro {
+            color: #647875;
+            max-width: 750px;
+            margin-bottom: 30px;
+        }
+
+        .api-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            min-width: 0;
+            background: white;
+            border: 1px solid #d5eeea;
+            border-radius: 17px;
+            padding: 23px;
+            box-shadow: 0 8px 24px rgba(15, 118, 110, 0.06);
+        }
+
+        .card h2 {
+            margin-top: 8px;
+            font-size: 21px;
+        }
+
+        .api-label {
+            color: #0f766e;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .description {
+            color: #647875;
+            font-size: 14px;
+        }
+
+        button, select, input {
+            font: inherit;
+        }
+
+        button {
+            background: #0f766e;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            padding: 11px 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #134e4a;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #bddbd6;
+            border-radius: 9px;
+            background: white;
+            color: #23413e;
+            margin: 5px 0 12px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .result {
+            margin-top: 15px;
+            background: #f0fdfa;
+            border: 1px dashed #9dd4cb;
+            border-radius: 10px;
+            padding: 14px;
+            min-height: 48px;
+            overflow-wrap: anywhere;
+        }
+
+        .message {
+            color: #647875;
+            font-size: 14px;
+        }
+
+        .error {
+            color: #9f1239;
+            background: #fff1f2;
+            border: 1px solid #fecdd3;
+            padding: 12px;
+            border-radius: 9px;
+            margin-top: 12px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .weather-temperature {
+            font-size: 32px;
+            font-weight: bold;
+            color: #0f766e;
+        }
+
+        .dog-image {
+            display: block;
+            width: 100%;
+            max-height: 260px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-top: 12px;
+            background: #f0fdfa;
+        }
+
+        .pokemon-image {
+            width: 125px;
+            height: 125px;
+            object-fit: contain;
+            background: #ccfbf1;
+            border-radius: 50%;
+            display: block;
+            margin: 12px auto;
+        }
+
+        .trivia-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            margin-top: 9px;
+            background: #ccfbf1;
+            color: #134e4a;
+        }
+
+        .trivia-option:hover {
+            background: #5eead4;
+            color: #134e4a;
+        }
+
+        .trivia-option:disabled {
+            opacity: 1;
+        }
+
+        .profile {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            margin-top: 12px;
+        }
+
+        .profile img {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            border: 3px solid #ccfbf1;
+        }
+
+        .profile p {
+            margin: 3px 0;
+            overflow-wrap: anywhere;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 30px 0;
+            color: #0f766e;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 22px;
+            color: #647875;
+            background: white;
+            border-top: 1px solid #d5eeea;
+            font-size: 14px;
+        }
+
+        @media (max-width: 700px) {
+            .api-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a href="../index.html">← My Web Programming Portfolio</a>
+</header>
+
+<main>
+    <span class="tag">WEEK 6 · TASK 2 · API INTEGRATION</span>
+
+    <h1>API Explorer Hub</h1>
+
+    <p class="intro">
+        Welcome to my API Explorer! This project connects six different
+        public APIs to create six mini-applications. Explore weather,
+        currency exchange rates, trivia, dog images, Pokémon information,
+        and random user profiles.
+    </p>
+
+    <div class="api-grid">
+
+        <!-- API 1: WEATHER -->
+        <section class="card">
+            <span class="api-label">API 01 · OPEN-METEO</span>
+            <h2>Weather Explorer</h2>
+
+            <p class="description">
+                Get current weather information for a selected city.
+            </p>
+
+            <label for="weatherCity">Choose a city</label>
+
+            <select id="weatherCity">
+                <option value="Seoul">Seoul</option>
+                <option value="Kathmandu">Kathmandu</option>
+                <option value="Tokyo">Tokyo</option>
+                <option value="London">London</option>
+                <option value="New York">New York</option>
+            </select>
+
+            <button type="button" id="weatherButton"
+                    onclick="getWeather()">
+                Check Weather
+            </button>
+
+            <div class="result" id="weatherResult" aria-live="polite">
+                <p class="message">Choose a city to see its weather.</p>
+            </div>
+        </section>
+
+
+        <!-- API 2: CURRENCY -->
+        <section class="card">
+            <span class="api-label">API 02 · EXCHANGERATE-API</span>
+            <h2>Currency Converter</h2>
+
+            <p class="description">
+                Convert an amount using published exchange rates.
+            </p>
+
+            <label for="amount">Amount</label>
+            <input id="amount" type="number" min="0"
+                   value="100" placeholder="Enter amount">
+
+            <label for="fromCurrency">From</label>
+            <select id="fromCurrency">
+                <option value="USD">USD — US Dollar</option>
+                <option value="KRW">KRW — Korean Won</option>
+                <option value="NPR">NPR — Nepalese Rupee</option>
+                <option value="EUR">EUR — Euro</option>
+                <option value="INR">INR — Indian Rupee</option>
+                <option value="JPY">JPY — Japanese Yen</option>
+                <option value="GBP">GBP — British Pound</option>
+            </select>
+
+            <label for="toCurrency">To</label>
+            <select id="toCurrency">
+                <option value="KRW">KRW — Korean Won</option>
+                <option value="USD">USD — US Dollar</option>
+                <option value="NPR">NPR — Nepalese Rupee</option>
+                <option value="EUR">EUR — Euro</option>
+                <option value="INR">INR — Indian Rupee</option>
+                <option value="JPY">JPY — Japanese Yen</option>
+                <option value="GBP">GBP — British Pound</option>
+            </select>
+
+            <button type="button" id="currencyButton"
+                    onclick="convertCurrency()">
+                Convert Currency
+            </button>
+
+            <div class="result" id="currencyResult" aria-live="polite">
+                <p class="message">Your conversion will appear here.</p>
+            </div>
+        </section>
+
+
+        <!-- API 3: TRIVIA -->
+        <section class="card">
+            <span class="api-label">API 03 · OPEN TRIVIA DB</span>
+            <h2>Trivia Challenge</h2>
+
+            <p class="description">
+                Answer a random multiple-choice question.
+            </p>
+
+            <button type="button" id="triviaButton"
+                    onclick="loadTrivia()">
+                Get a Question
+            </button>
+
+            <div class="result" id="triviaResult" aria-live="polite">
+                <p class="message">
+                    Click the button to start the trivia challenge.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- API 4: DOG IMAGE -->
+        <section class="card">
+            <span class="api-label">API 04 · DOG CEO</span>
+            <h2>Random Dog Gallery</h2>
+
+            <p class="description">
+                Fetch a random dog picture from the Dog CEO API.
+            </p>
+
+            <button type="button" id="dogButton"
+                    onclick="getDogImage()">
+                Show Me a Dog
+            </button>
+
+            <div class="result" id="dogResult" aria-live="polite">
+                <p class="message">Your dog picture will appear here.</p>
+
+                <img id="dogImage" class="dog-image hidden"
+                     alt="A random dog">
+            </div>
+        </section>
+
+
+        <!-- API 5: POKEMON -->
+        <section class="card">
+            <span class="api-label">API 05 · POKEAPI</span>
+            <h2>Pokémon Explorer</h2>
+
+            <p class="description">
+                Search for a Pokémon to discover its type and stats.
+            </p>
+
+            <label for="pokemonName">Pokémon name or ID</label>
+            <input id="pokemonName" type="text"
+                   value="pikachu" placeholder="e.g. pikachu">
+
+            <button type="button" id="pokemonButton"
+                    onclick="searchPokemon()">
+                Search Pokémon
+            </button>
+
+            <div class="result" id="pokemonResult" aria-live="polite">
+                <p class="message">
+                    Enter a Pokémon name to get started.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- API 6: RANDOM USER -->
+        <section class="card">
+            <span class="api-label">API 06 · RANDOM USER</span>
+            <h2>Random Profile Generator</h2>
+
+            <p class="description">
+                Generate a sample profile with a name, picture,
+                email, and location.
+            </p>
+
+            <button type="button" id="userButton"
+                    onclick="getRandomUser()">
+                Generate Profile
+            </button>
+
+            <div class="result" id="userResult" aria-live="polite">
+                <p class="message">
+                    Click the button to generate a sample profile.
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+    <a class="back-link" href="../index.html">
+        ← Back to My Portfolio
+    </a>
+</main>
+
+<footer>
+    Week 6 · Task 2 · Six API Integrations
+</footer>
+
+<script>
+    // Helper function for API requests.
+    // It checks HTTP status and converts JSON responses.
+    async function fetchJSON(url) {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("The server returned an error.");
+        }
+
+        return await response.json();
+    }
+
+
+    // API 1: OPEN-METEO WEATHER
+    async function getWeather() {
+        const city = document.getElementById("weatherCity").value;
+        const result = document.getElementById("weatherResult");
+        const button = document.getElementById("weatherButton");
+
+        const cities = {
+            "Seoul": {
+                latitude: 37.5665,
+                longitude: 126.9780
+            },
+            "Kathmandu": {
+                latitude: 27.7172,
+                longitude: 85.3240
+            },
+            "Tokyo": {
+                latitude: 35.6762,
+                longitude: 139.6503
+            },
+            "London": {
+                latitude: 51.5072,
+                longitude: -0.1276
+            },
+            "New York": {
+                latitude: 40.7128,
+                longitude: -74.0060
+            }
+        };
+
+        const location = cities[city];
+
+        result.textContent = "Loading weather...";
+        button.disabled = true;
+
+        try {
+            const url =
+                `https://api.open-meteo.com/v1/forecast` +
+                `?latitude=${location.latitude}` +
+                `&longitude=${location.longitude}` +
+                `&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,weather_code` +
+                `&timezone=auto`;
+
+            const data = await fetchJSON(url);
+            const current = data.current;
+
+            if (!current) {
+                throw new Error("Weather data is unavailable.");
+            }
+
+            const weatherDescriptions = {
+                0: "Clear sky",
+                1: "Mainly clear",
+                2: "Partly cloudy",
+                3: "Overcast",
+                45: "Fog",
+                48: "Depositing rime fog",
+                51: "Light drizzle",
+                53: "Moderate drizzle",
+                55: "Dense drizzle",
+                61: "Slight rain",
+                63: "Moderate rain",
+                65: "Heavy rain",
+                71: "Slight snow",
+                73: "Moderate snow",
+                75: "Heavy snow",
+                80: "Rain showers",
+                95: "Thunderstorm"
+            };
+
+            const condition =
+                weatherDescriptions[current.weather_code] ||
+                "Weather condition code " + current.weather_code;
+
+            result.replaceChildren();
+
+            const title = document.createElement("h3");
+            title.textContent = city;
+
+            const temperature = document.createElement("p");
+            temperature.className = "weather-temperature";
+            temperature.textContent =
+                `${current.temperature_2m} °C`;
+
+            const description = document.createElement("p");
+            description.textContent = condition;
+
+            const feels = document.createElement("p");
+            feels.textContent =
+                `Feels like: ${current.apparent_temperature} °C`;
+
+            const humidity = document.createElement("p");
+            humidity.textContent =
+                `Humidity: ${current.relative_humidity_2m}%`;
+
+            const wind = document.createElement("p");
+            wind.textContent =
+                `Wind speed: ${current.wind_speed_10m} km/h`;
+
+            const time = document.createElement("p");
+            time.className = "message";
+            time.textContent = `Updated: ${current.time}`;
+
+            result.append(
+                title, temperature, description,
+                feels, humidity, wind, time
+            );
+
+        } catch (error) {
+            result.textContent =
+                "Could not load weather. Please try again.";
+
+            console.error("Weather API error:", error);
+
+        } finally {
+            button.disabled = false;
+        }
+    }
+
+
+    // API 2: EXCHANGE RATE API
+    async function convertCurrency() {
+        const amount = Number(
+            document.getElementById("amount").value
+        );
+
+        const from = document.getElementById("fromCurrency").value;
+        const to = document.getElementById("toCurrency").value;
+
+        const result = document.getElementById("currencyResult");
+        const button = document.getElementById("currencyButton");
+
+        if (
+            document.getElementById("amount").value.trim() === "" ||
+            !Number.isFinite(amount) ||
+            amount < 0
+        ) {
+            result.textContent =
+                "Please enter a valid, non-negative amount.";
+            return;
+        }
+
+        result.textContent = "Fetching exchange rates...";
+        button.disabled = true;
+
+        try {
+            const url = `https://open.er-api.com/v6/latest/${from}`;
+            const data = await fetchJSON(url);
+
+            if (
+                data.result !== "success" ||
+                typeof data.rates[to] !== "number"
+            ) {
+                throw new Error("Exchange rate is unavailable.");
+            }
+
+            const rate = data.rates[to];
+            const converted = amount * rate;
+
+            result.replaceChildren();
+
+            const output = document.createElement("h3");
+            output.textContent =
+                `${amount.toLocaleString()} ${from} = ` +
+                `${converted.toLocaleString(undefined, {
+                    maximumFractionDigits: 2,
+                    minimumFractionDigits: 2
+                })} ${to}`;
+
+            const rateText = document.createElement("p");
+            rateText.textContent =
+                `Rate: 1 ${from} = ${rate} ${to}`;
+
+            const updated = document.createElement("p");
+            updated.className = "message";
+            updated.textContent =
+                `Rates last updated: ${data.time_last_update_utc || "Not provided"}`;
+
+            result.append(output, rateText, updated);
+
+        } catch (error) {
+            result.textContent =
+                "Could not get exchange rates. Please try again.";
+
+            console.error("Currency API error:", error);
+
+        } finally {
+            button.disabled = false;
+        }
+    }
+
+
+    // API 3: OPEN TRIVIA DATABASE
+    let triviaCorrectAnswer = "";
+    let triviaAnswered = false;
+
+    // Decode HTML entities returned by the trivia API.
+    function decodeHTML(value) {
+        const textarea = document.createElement("textarea");
+        textarea.innerHTML = value;
+        return textarea.value;
+    }
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+
+        return array;
+    }
+
+    async function loadTrivia() {
+        const result = document.getElementById("triviaResult");
+        const button = document.getElementById("triviaButton");
+
+        result.textContent = "Loading a trivia question...";
+        button.disabled = true;
+        triviaAnswered = false;
+
+        try {
+            const data = await fetchJSON(
+                "https://opentdb.com/api.php?amount=1&type=multiple"
+            );
+
+            if (
+                data.response_code !== 0 ||
+                !data.results ||
+                data.results.length === 0
+            ) {
+                throw new Error("No trivia question was returned.");
+            }
+
+            const question = data.results[0];
+
+            triviaCorrectAnswer =
+                decodeHTML(question.correct_answer);
+
+            const answers = shuffleArray([
+                question.correct_answer,
+                ...question.incorrect_answers
+            ]);
+
+            result.replaceChildren();
+
+            const category = document.createElement("p");
+            category.className = "message";
+            category.textContent =
+                `${decodeHTML(question.category)} · ${question.difficulty}`;
+
+            const questionText = document.createElement("h3");
+            questionText.textContent =
+                decodeHTML(question.question);
+
+            const options = document.createElement("div");
+
+            const feedback = document.createElement("p");
+            feedback.className = "message";
+            feedback.setAttribute("aria-live", "polite");
+
+            answers.forEach(function(answer) {
+                const answerButton = document.createElement("button");
+                answerButton.type = "button";
+                answerButton.className = "trivia-option";
+                answerButton.textContent = decodeHTML(answer);
+
+                answerButton.addEventListener("click", function() {
+                    if (triviaAnswered) {
+                        return;
+                    }
+
+                    triviaAnswered = true;
+
+                    options.querySelectorAll("button").forEach(
+                        function(item) {
+                            item.disabled = true;
+                        }
+                    );
+
+                    if (answerButton.textContent === triviaCorrectAnswer) {
+                        feedback.textContent = "Correct! Great job!";
+                    } else {
+                        feedback.textContent =
+                            `Not quite! The correct answer is: ${triviaCorrectAnswer}`;
+                    }
+                });
+
+                options.appendChild(answerButton);
+            });
+
+            result.append(category, questionText, options, feedback);
+
+        } catch (error) {
+            result.textContent =
+                "Could not load trivia. Please try again.";
+
+            console.error("Trivia API error:", error);
+
+        } finally {
+            button.disabled = false;
+        }
+    }
+
+
+    // API 4: DOG CEO RANDOM IMAGE
+    async function getDogImage() {
+        const result = document.getElementById("dogResult");
+        const image = document.getElementById("dogImage");
+        const button = document.getElementById("dogButton");
+
+        result.querySelector(".message")?.remove();
+
+        image.classList.add("hidden");
+        button.disabled = true;
+
+        const message = document.createElement("p");
+        message.className = "message";
+        message.textContent = "Finding a cute dog...";
+        result.prepend(message);
+
+        try {
+            const data = await fetchJSON(
+                "https://dog.ceo/api/breeds/image/random"
+            );
+
+            if (data.status !== "success" || !data.message) {
+                throw new Error("No dog picture was returned.");
+            }
+
+            image.src = data.message;
+            image.alt = "A random dog from the Dog CEO API";
+
+            image.onload = function() {
+                image.classList.remove("hidden");
+                message.textContent = "Here's your random dog!";
+            };
+
+            image.onerror = function() {
+                image.classList.add("hidden");
+                message.textContent =
+                    "The image could not be displayed. Try another one.";
+            };
+
+        } catch (error) {
+            message.textContent =
+                "Could not load a dog image. Please try again.";
+
+            console.error("Dog API error:", error);
+
+        } finally {
+            button.disabled = false;
+        }
+    }
+
+
+    // API 5: POKEAPI
+    async function searchPokemon() {
+        const input = document.getElementById("pokemonName");
+        const result = document.getElementById("pokemonResult");
+        const button = document.getElementById("pokemonButton");
+
+        const name = input.value.trim().toLowerCase();
+
+        if (!name) {
+            result.textContent = "Enter a Pokémon name or ID first.";
+            return;
+        }
+
+        result.textContent = "Searching for Pokémon...";
+        button.disabled = true;
+
+        try {
+            const data = await fetchJSON(
+                `https://pokeapi.co/api/v2/pokemon/${encodeURIComponent(name)}`
+            );
+
+            result.replaceChildren();
+
+            const title = document.createElement("h3");
+            title.textContent =
+                data.name.charAt(0).toUpperCase() + data.name.slice(1);
+
+            const image = document.createElement("img");
+            image.className = "pokemon-image";
+            image.alt = data.name;
+
+            if (data.sprites.front_default) {
+                image.src = data.sprites.front_default;
+            } else {
+                image.alt = "No image available for this Pokémon";
+                image.classList.add("hidden");
+            }
+
+            const types = data.types.map(function(item) {
+                return item.type.name;
+            }).join(", ");
+
+            const typeText = document.createElement("p");
+            typeText.textContent = `Type: ${types}`;
+
+            const height = document.createElement("p");
+            height.textContent = `Height: ${data.height / 10} m`;
+
+            const weight = document.createElement("p");
+            weight.textContent = `Weight: ${data.weight / 10} kg`;
+
+            const experience = document.createElement("p");
+            experience.textContent =
+                `Base experience: ${data.base_experience ?? "Not available"}`;
+
+            result.append(
+                title, image, typeText, height, weight, experience
+            );
+
+        } catch (error) {
+            result.textContent =
+                "Pokémon not found. Try a name such as pikachu or charizard.";
+
+            console.error("PokéAPI error:", error);
+
+        } finally {
+            button.disabled = false;
+        }
+    }
+
+
+    // API 6: RANDOM USER GENERATOR
+    async function getRandomUser() {
+        const result = document.getElementById("userResult");
+        const button = document.getElementById("userButton");
+
+        result.textContent = "Generating a sample profile...";
+        button.disabled = true;
+
+        try {
+            const data = await fetchJSON(
+                "https://randomuser.me/api/"
+            );
+
+            if (!data.results || data.results.length === 0) {
+                throw new Error("No user profile was returned.");
+            }
+
+            const user = data.results[0];
+
+            result.replaceChildren();
+
+            const profile = document.createElement("div");
+            profile.className = "profile";
+
+            const image = document.createElement("img");
+            image.src = user.picture.large;
+            image.alt = "Sample profile portrait";
+
+            const details = document.createElement("div");
+
+            const name = document.createElement("h3");
+            name.textContent =
+                `${user.name.first} ${user.name.last}`;
+
+            const email = document.createElement("p");
+            email.textContent = user.email;
+
+            const location = document.createElement("p");
+            location.className = "message";
+            location.textContent =
+                `${user.location.city}, ${user.location.country}`;
+
+            details.append(name, email, location);
+            profile.append(image, details);
+            result.appendChild(profile);
+
+            const note = document.createElement("p");
+            note.className = "message";
+            note.textContent =
+                "This is randomly generated sample data, not a verified identity.";
+
+            result.appendChild(note);
+
+        } catch (error) {
+            result.textContent =
+                "Could not generate a profile. Please try again.";
+
+            console.error("Random User API error:", error);
+
+        } finally {
+            button.disabled = false;
+        }
+    }
+</script>
+
+</body>
+</html>
