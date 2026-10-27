@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 8 | Student Registration Form</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f0fdfa;
+            color: #23413e;
+            line-height: 1.6;
+        }
+
+        header {
+            background: white;
+            padding: 18px 7%;
+            border-bottom: 1px solid #d5eeea;
+        }
+
+        header a, .back-link {
+            color: #0f766e;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main {
+            max-width: 850px;
+            width: 92%;
+            margin: 35px auto;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #ccfbf1;
+            color: #134e4a;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        h1, h2 { color: #134e4a; }
+
+        .intro { color: #647875; }
+
+        form {
+            background: white;
+            padding: 25px;
+            border-radius: 17px;
+            border: 1px solid #d5eeea;
+            box-shadow: 0 8px 24px #0f766e0f;
+        }
+
+        fieldset {
+            margin: 0 0 25px;
+            padding: 20px;
+            border: 1px solid #bddbd6;
+            border-radius: 12px;
+        }
+
+        legend {
+            padding: 0 8px;
+            color: #0f766e;
+            font-weight: bold;
+        }
+
+        .field { margin-bottom: 17px; }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 11px 12px;
+            border: 2px solid #d5eeea;
+            border-radius: 8px;
+            background: white;
+            color: #23413e;
+            font: inherit;
+        }
+
+        input:focus, select:focus {
+            outline: 3px solid #ccfbf1;
+            border-color: #0f766e;
+        }
+
+        /* Style valid and invalid fields */
+        input:valid:not([type="range"]):not([type="checkbox"]),
+        select:valid {
+            border-color: #16a34a;
+        }
+
+        input:invalid:not(:placeholder-shown):not([type="checkbox"]):not([type="range"]),
+        select:invalid {
+            border-color: #dc2626;
+        }
+
+        input[type="checkbox"] {
+            width: auto;
+            accent-color: #0f766e;
+        }
+
+        .terms {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .terms label {
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .hint {
+            display: block;
+            color: #647875;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        input[type="range"] {
+            padding: 0;
+            border: none;
+            accent-color: #0f766e;
+        }
+
+        .range-value {
+            color: #0f766e;
+            font-weight: bold;
+        }
+
+        button {
+            border: none;
+            border-radius: 9px;
+            padding: 12px 18px;
+            background: #0f766e;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover { background: #134e4a; }
+
+        .form-note {
+            color: #647875;
+            font-size: 13px;
+            margin-top: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 25px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 22px;
+            color: #647875;
+            background: white;
+            border-top: 1px solid #d5eeea;
+        }
+
+        @media (max-width: 600px) {
+            form { padding: 16px; }
+            fieldset { padding: 14px; }
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <a href="../index.html">← My Web Programming Portfolio</a>
+</header>
+
+<main>
+    <span class="tag">WEEK 8 · TASK 1</span>
+    <h1>Student Registration Form</h1>
+
+    <p class="intro">
+        Register your student information by completing the personal
+        and account details below. Required fields must be completed
+        before the form can be submitted.
+    </p>
+
+    <form method="post" action="https://httpbin.org/post">
+
+        <fieldset>
+            <legend>Personal Information</legend>
+
+            <div class="field">
+                <label for="fullName">Full Name *</label>
+                <input type="text" id="fullName" name="fullName"
+                       placeholder="Enter your full name" required>
+            </div>
+
+            <div class="field">
+                <label for="studentId">Student ID *</label>
+                <input type="text" id="studentId" name="studentId"
+                       placeholder="9 digits" pattern="[0-9]{9}"
+                       title="Enter exactly 9 digits" required>
+                <span class="hint">Enter your 9-digit student ID.</span>
+            </div>
+
+            <div class="field">
+                <label for="dob">Date of Birth *</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+
+            <div class="field">
+                <label for="major">Major *</label>
+                <select id="major" name="major" required>
+                    <option value="">Choose your major</option>
+                    <option value="Computer Engineering">Computer Engineering</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Business Administration">Business Administration</option>
+                    <option value="Artificial Intelligence">Artificial Intelligence</option>
+                    <option value="Electrical Engineering">Electrical Engineering</option>
+                </select>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Account Information</legend>
+
+            <div class="field">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email"
+                       placeholder="name@example.com" required>
+            </div>
+
+            <div class="field">
+                <label for="password">Password *</label>
+                <input type="password" id="password" name="password"
+                       minlength="8" placeholder="At least 8 characters"
+                       required>
+                <span class="hint">Password must contain at least 8 characters.</span>
+            </div>
+
+            <div class="field">
+                <label for="phone">Phone Number *</label>
+                <input type="text" id="phone" name="phone"
+                       placeholder="010-1234-5678"
+                       pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+                       title="Use the format 010-1234-5678" required>
+                <span class="hint">Format: 010-1234-5678</span>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Additional Information</legend>
+
+            <div class="field">
+                <label for="codingYears">Years of Coding Experience</label>
+                <input type="range" id="codingYears" name="codingYears"
+                       min="0" max="10" value="0">
+
+                <p>
+                    Experience:
+                    <output id="yearsValue" class="range-value" for="codingYears">0</output>
+                    years
+                </p>
+            </div>
+
+            <div class="field">
+                <div class="terms">
+                    <input type="checkbox" id="terms" name="terms"
+                           value="agreed" required>
+                    <label for="terms">I agree to the terms and conditions. *</label>
+                </div>
+            </div>
+        </fieldset>
+
+        <button type="submit">Submit Registration</button>
+
+        <p class="form-note">
+            * Required fields. Use sample information when testing this
+            demonstration form; its POST action sends submitted values to
+            an external testing service.
+        </p>
+    </form>
+
+    <a class="back-link" href="../index.html">← Back to Portfolio</a>
+</main>
+
+<footer>Week 8 · Student Registration Form</footer>
+
+<script>
+    // Show the current range slider value
+    const codingYears = document.getElementById("codingYears");
+    const yearsValue = document.getElementById("yearsValue");
+
+    codingYears.addEventListener("input", function() {
+        yearsValue.textContent = codingYears.value;
+    });
+</script>
+
+</body>
+</html>
