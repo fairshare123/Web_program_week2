@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 7 Task 3 | Search Behavior</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f0fdfa;color:#23413e;line-height:1.6}
+header,footer{background:white;padding:18px 7%;border-bottom:1px solid #d5eeea}
+a{color:#0f766e;text-decoration:none;font-weight:bold}main{width:92%;max-width:1000px;margin:35px auto}
+.tag{background:#ccfbf1;color:#134e4a;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:bold}
+h1,h2,h3{color:#134e4a}.intro,.message{color:#647875}
+.card{background:white;border:1px solid #d5eeea;border-radius:16px;padding:24px;margin-top:25px}
+.search-row{display:flex;gap:10px}input{flex:1;min-width:0;padding:12px;border:1px solid #bddbd6;border-radius:9px;font:inherit}
+button{padding:11px 16px;border:0;border-radius:9px;background:#0f766e;color:white;font-weight:bold;cursor:pointer}
+button:hover{background:#134e4a}button.secondary{background:#ccfbf1;color:#134e4a}button:disabled{opacity:.6;cursor:wait}
+.results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.book{display:flex;gap:14px;padding:16px;background:#f0fdfa;border:1px solid #d5eeea;border-radius:12px}
+.cover{width:75px;height:110px;object-fit:cover;flex-shrink:0;background:#ccfbf1}.book h3{margin:0 0 5px}.book p{font-size:14px;margin:5px 0}
+.back{display:inline-block;margin:25px 0}footer{text-align:center;color:#647875;border-top:1px solid #d5eeea}
+@media(max-width:650px){.results{grid-template-columns:1fr}.search-row{flex-wrap:wrap}.search-row input{flex-basis:100%}}
+</style>
+</head>
+<body>
+<header><a href="../index.html">← My Web Programming Portfolio</a></header>
+<main>
+<span class="tag">WEEK 7 · TASK 3</span>
+<h1>Search Behavior</h1>
+<p class="intro">A book search with better input handling, clear controls, and user-friendly feedback.</p>
+
+<section class="card">
+<h2>Search Books</h2>
+<div class="search-row">
+<input id="query" type="search" placeholder="Enter at least 2 characters..." aria-label="Book title">
+<button id="searchButton" onclick="searchBooks()">Search</button>
+<button type="button" class="secondary" onclick="clearSearch()">Clear</button>
+</div>
+<p id="status" class="message" aria-live="polite">Type a title, then press Enter or Search.</p>
+<div id="results" class="results"></div>
+</section>
+<a class="back" href="../index.html">← Back to Portfolio</a>
+</main>
+<footer>Week 7 · Task 3 · Search Behavior</footer>
+
+<script>
+const input=document.getElementById("query");
+const results=document.getElementById("results");
+const status=document.getElementById("status");
+const button=document.getElementById("searchButton");
+
+async function searchBooks(){
+    const query=input.value.trim();
+    results.replaceChildren();
+
+    if(query.length<2){
+        status.textContent="Please enter at least 2 characters to search.";
+        input.focus();
+        return;
+    }
+
+    status.textContent="Searching...";
+    button.disabled=true;
+
+    try{
+        const url="https://openlibrary.org/search.json?title="+
+            encodeURIComponent(query)+
+            "&limit=12&fields=key,title,author_name,first_publish_year,cover_i";
+        const response=await fetch(url);
+        if(!response.ok) throw new Error("Search request failed.");
+
+        const data=await response.json();
+        const books=data.docs||[];
+
+        if(!books.length){
+            status.textContent="No books found. Try a different title.";
+            return;
+        }
+
+        status.textContent=`Found ${data.numFound.toLocaleString()} matches. Showing ${books.length}.`;
+
+        books.forEach(book=>{
+            const card=document.createElement("article");
+            card.className="book";
+
+            if(book.cover_i){
+                const cover=document.createElement("img");
+                cover.className="cover";
+                cover.loading="lazy";
+                cover.alt="Book cover";
+                cover.src=`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`;
+                card.appendChild(cover);
+            }
+
+            const info=document.createElement("div");
+            const title=document.createElement("h3");
+            title.textContent=book.title||"Untitled";
+            const author=document.createElement("p");
+            author.textContent="Author: "+(book.author_name?.slice(0,3).join(", ")||"Unknown");
+            const year=document.createElement("p");
+            year.textContent="First published: "+(book.first_publish_year||"Unknown");
+            info.append(title,author,year);
+            card.appendChild(info);
+            results.appendChild(card);
+        });
+    }catch(error){
+        status.textContent="Search failed. Please check your connection and try again.";
+        console.error(error);
+    }finally{
+        button.disabled=false;
+    }
+}
+
+function clearSearch(){
+    input.value="";
+    results.replaceChildren();
+    status.textContent="Search cleared. Enter a new title to begin.";
+    input.focus();
+}
+
+input.addEventListener("keydown",event=>{
+    if(event.key==="Enter") searchBooks();
+});
+</script>
+</body>
+</html>

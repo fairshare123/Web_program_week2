@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 7 Task 1 | Book Search</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f0fdfa;
+            color: #23413e;
+            line-height: 1.6;
+        }
+
+        header, footer {
+            background: white;
+            padding: 18px 7%;
+            border-bottom: 1px solid #d5eeea;
+        }
+
+        a {
+            color: #0f766e;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main {
+            width: 92%;
+            max-width: 1000px;
+            margin: 35px auto;
+        }
+
+        .tag {
+            color: #134e4a;
+            background: #ccfbf1;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        h1, h2, h3 { color: #134e4a; }
+
+        .intro { color: #647875; }
+
+        .card {
+            background: white;
+            border: 1px solid #d5eeea;
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 25px;
+        }
+
+        .search-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            min-width: 0;
+            padding: 12px;
+            border: 1px solid #bddbd6;
+            border-radius: 9px;
+            font: inherit;
+        }
+
+        button {
+            padding: 11px 16px;
+            border: 0;
+            border-radius: 9px;
+            background: #0f766e;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover { background: #134e4a; }
+
+        .results {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .book {
+            padding: 17px;
+            background: #f0fdfa;
+            border: 1px solid #d5eeea;
+            border-radius: 12px;
+        }
+
+        .book h3 { margin-top: 0; }
+        .message { color: #647875; }
+        .back { display: inline-block; margin: 25px 0; }
+
+        footer {
+            text-align: center;
+            color: #647875;
+            border-top: 1px solid #d5eeea;
+        }
+
+        @media (max-width: 600px) {
+            .search-row, .results { grid-template-columns: 1fr; }
+            .search-row { display: flex; flex-direction: column; }
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <a href="../index.html">← My Web Programming Portfolio</a>
+</header>
+
+<main>
+    <span class="tag">WEEK 7 · TASK 1</span>
+    <h1>Book Search</h1>
+    <p class="intro">
+        Search a small collection of sample books by title or author.
+        This first task focuses on the search interface and displaying results.
+    </p>
+
+    <section class="card">
+        <h2>Book Searcher</h2>
+
+        <div class="search-row">
+            <input id="searchInput" type="search"
+                   placeholder="Search by book title or author..."
+                   aria-label="Search books">
+            <button type="button" onclick="searchBooks()">Search</button>
+        </div>
+
+        <p id="status" class="message" aria-live="polite">
+            Enter a book title or author to begin.
+        </p>
+
+        <div id="results" class="results"></div>
+    </section>
+
+    <a class="back" href="../index.html">← Back to Portfolio</a>
+</main>
+
+<footer>Week 7 · Task 1 · Book Search</footer>
+
+<script>
+    const books = [
+        { title: "The Hobbit", author: "J. R. R. Tolkien", year: 1937 },
+        { title: "Pride and Prejudice", author: "Jane Austen", year: 1813 },
+        { title: "Dune", author: "Frank Herbert", year: 1965 },
+        { title: "Frankenstein", author: "Mary Shelley", year: 1818 },
+        { title: "Little Women", author: "Louisa May Alcott", year: 1868 },
+        { title: "The Great Gatsby", author: "F. Scott Fitzgerald", year: 1925 },
+        { title: "The Time Machine", author: "H. G. Wells", year: 1895 },
+        { title: "Jane Eyre", author: "Charlotte Brontë", year: 1847 }
+    ];
+
+    const searchInput = document.getElementById("searchInput");
+    const results = document.getElementById("results");
+    const status = document.getElementById("status");
+
+    function displayBooks(list) {
+        results.replaceChildren();
+
+        list.forEach(function(book) {
+            const card = document.createElement("article");
+            card.className = "book";
+
+            const title = document.createElement("h3");
+            title.textContent = book.title;
+
+            const author = document.createElement("p");
+            author.textContent = "Author: " + book.author;
+
+            const year = document.createElement("p");
+            year.textContent = "First published: " + book.year;
+
+            card.append(title, author, year);
+            results.appendChild(card);
+        });
+
+        status.textContent = list.length
+            ? `${list.length} book(s) found.`
+            : "No books found. Try another title or author.";
+    }
+
+    function searchBooks() {
+        const query = searchInput.value.trim().toLowerCase();
+
+        if (!query) {
+            status.textContent = "Please enter a title or author.";
+            results.replaceChildren();
+            searchInput.focus();
+            return;
+        }
+
+        const matchingBooks = books.filter(function(book) {
+            return book.title.toLowerCase().includes(query) ||
+                   book.author.toLowerCase().includes(query);
+        });
+
+        displayBooks(matchingBooks);
+    }
+
+    searchInput.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            searchBooks();
+        }
+    });
+
+    displayBooks(books);
+</script>
+
+</body>
+</html>

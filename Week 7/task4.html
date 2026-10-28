@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 7 Task 4 | Book Search Flow</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f0fdfa;color:#23413e;line-height:1.6}
+header,footer{background:white;padding:18px 7%;border-bottom:1px solid #d5eeea}
+a{color:#0f766e;text-decoration:none;font-weight:bold}main{width:92%;max-width:1000px;margin:35px auto}
+.tag{background:#ccfbf1;color:#134e4a;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:bold}
+h1,h2,h3{color:#134e4a}.intro,.message{color:#647875}
+.card{background:white;border:1px solid #d5eeea;border-radius:16px;padding:24px;margin-top:25px}
+.search-row{display:flex;gap:10px}input{flex:1;min-width:0;padding:12px;border:1px solid #bddbd6;border-radius:9px;font:inherit}
+button{padding:11px 16px;border:0;border-radius:9px;background:#0f766e;color:white;font-weight:bold;cursor:pointer}
+button:hover{background:#134e4a}button:disabled{opacity:.6;cursor:wait}
+.results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.book{display:flex;gap:14px;padding:16px;background:#f0fdfa;border:1px solid #d5eeea;border-radius:12px}
+.cover{width:75px;height:110px;object-fit:cover;flex-shrink:0;background:#ccfbf1}.book h3{margin:0 0 5px}.book p{font-size:14px;margin:5px 0}
+.spinner{width:34px;height:34px;border:4px solid #ccfbf1;border-top-color:#0f766e;border-radius:50%;animation:spin .8s linear infinite;margin:15px 0}
+@keyframes spin{to{transform:rotate(360deg)}}.hidden{display:none!important}
+.back{display:inline-block;margin:25px 0}footer{text-align:center;color:#647875;border-top:1px solid #d5eeea}
+@media(max-width:650px){.results{grid-template-columns:1fr}.search-row{flex-direction:column}}
+</style>
+</head>
+<body>
+<header><a href="../index.html">← My Web Programming Portfolio</a></header>
+<main>
+<span class="tag">WEEK 7 · TASK 4</span>
+<h1>Book Search Flow</h1>
+<p class="intro">Watch the search states change while the application retrieves results from Open Library.</p>
+
+<section class="card">
+<h2>Find Books</h2>
+<div class="search-row">
+<input id="query" type="search" placeholder="Enter a book title..." aria-label="Book title">
+<button id="searchButton" onclick="searchBooks()">Search</button>
+</div>
+
+<div id="loading" class="hidden" role="status" aria-live="polite">
+    <div class="spinner" aria-hidden="true"></div>
+    <p class="message">Loading books...</p>
+</div>
+<p id="status" class="message" aria-live="polite">Enter a title and start searching.</p>
+<div id="results" class="results"></div>
+</section>
+
+<a class="back" href="../index.html">← Back to Portfolio</a>
+</main>
+<footer>Week 7 · Task 4 · Loading and Error Handling</footer>
+
+<script>
+const input=document.getElementById("query");
+const results=document.getElementById("results");
+const status=document.getElementById("status");
+const loading=document.getElementById("loading");
+const button=document.getElementById("searchButton");
+
+async function searchBooks(){
+    const query=input.value.trim();
+
+    if(!query){
+        status.textContent="Please enter a title before searching.";
+        results.replaceChildren();
+        input.focus();
+        return;
+    }
+
+    results.replaceChildren();
+    status.textContent="";
+    loading.classList.remove("hidden");
+    button.disabled=true;
+
+    try{
+        const url="https://openlibrary.org/search.json?title="+
+            encodeURIComponent(query)+
+            "&limit=12&fields=key,title,author_name,first_publish_year,cover_i";
+        const response=await fetch(url);
+
+        if(!response.ok){
+            throw new Error("The book service returned an error.");
+        }
+
+        const data=await response.json();
+        const books=data.docs||[];
+
+        if(!books.length){
+            status.textContent="No books found. Try a different title.";
+            return;
+        }
+
+        status.textContent=`Found ${data.numFound.toLocaleString()} matching books.`;
+
+        books.forEach(book=>{
+            const card=document.createElement("article");
+            card.className="book";
+
+            if(book.cover_i){
+                const image=document.createElement("img");
+                image.className="cover";
+                image.loading="lazy";
+                image.alt="Book cover";
+                image.src=`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`;
+                card.appendChild(image);
+            }
+
+            const info=document.createElement("div");
+            const title=document.createElement("h3");
+            title.textContent=book.title||"Untitled";
+            const author=document.createElement("p");
+            author.textContent="Author: "+(book.author_name?.slice(0,3).join(", ")||"Unknown");
+            const year=document.createElement("p");
+            year.textContent="First published: "+(book.first_publish_year||"Unknown");
+            info.append(title,author,year);
+            card.appendChild(info);
+            results.appendChild(card);
+        });
+
+    }catch(error){
+        status.textContent="We couldn't load the books. Check your connection and try again.";
+        console.error("Book search error:",error);
+    }finally{
+        loading.classList.add("hidden");
+        button.disabled=false;
+    }
+}
+
+input.addEventListener("keydown",event=>{
+    if(event.key==="Enter") searchBooks();
+});
+</script>
+</body>
+</html>
