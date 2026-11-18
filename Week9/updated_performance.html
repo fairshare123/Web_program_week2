@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Week 9 Lighthouse performance and SEO report for Dipika Aryal's Web Programming portfolio, with before-and-after results.">
+    <meta name="author" content="Dipika Aryal">
+    <meta name="theme-color" content="#0f766e">
+    <title>Week 9 Monday | Performance and SEO Report</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f766e'/%3E%3Ctext x='16' y='22' font-size='16' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EDA%3C/text%3E%3C/svg%3E">
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f0fdfa;
+            color: #23413e;
+            line-height: 1.6;
+        }
+
+        header, footer {
+            background: white;
+            padding: 18px 7%;
+            border-bottom: 1px solid #d5eeea;
+        }
+
+        a {
+            color: #0f766e;
+            font-weight: bold;
+        }
+
+        a:hover { color: #134e4a; }
+
+        a:focus-visible {
+            outline: 3px solid #eab308;
+            outline-offset: 3px;
+        }
+
+        header a, .back-link { text-decoration: none; }
+
+        .skip-link {
+            position: absolute;
+            left: 16px;
+            top: -60px;
+            z-index: 100;
+            background: #134e4a;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .skip-link:focus { top: 12px; }
+
+        main {
+            max-width: 850px;
+            width: 92%;
+            margin: 35px auto;
+        }
+
+        main:focus { outline: none; }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #ccfbf1;
+            color: #134e4a;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        h1, h2, h3 { color: #134e4a; }
+
+        h3 { margin-bottom: 4px; }
+
+        .intro { color: #4b5f5c; }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 17px;
+            border: 1px solid #d5eeea;
+            box-shadow: 0 8px 24px #0f766e0f;
+            margin-top: 25px;
+        }
+
+        .card h2 { margin-top: 0; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px 12px;
+            border-bottom: 1px solid #d5eeea;
+        }
+
+        th {
+            background: #f0fdfa;
+            color: #134e4a;
+        }
+
+        .better { color: #047857; font-weight: bold; }
+
+        .score {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #0f766e;
+        }
+
+        pre {
+            background: #134e4a;
+            color: #ecfdf5;
+            padding: 14px 16px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+
+        code { font-family: Consolas, monospace; }
+
+        :not(pre) > code {
+            background: #f0fdfa;
+            padding: 2px 6px;
+            border-radius: 5px;
+        }
+
+        figure { margin: 18px 0; }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 1px solid #d5eeea;
+        }
+
+        figcaption {
+            font-size: 0.9rem;
+            color: #4b5f5c;
+            margin-top: 6px;
+        }
+
+        .links {
+            display: grid;
+            gap: 10px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .links a {
+            display: block;
+            padding: 13px 16px;
+            background: #f0fdfa;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+        .links a:hover { background: #ccfbf1; }
+
+        .back-link {
+            display: inline-block;
+            margin: 25px 0;
+        }
+
+        footer {
+            text-align: center;
+            color: #4b5f5c;
+            border-top: 1px solid #d5eeea;
+        }
+
+        @media (max-width: 600px) {
+            .card { padding: 18px; }
+            th, td { padding: 8px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header>
+    <a href="../index.html">← My Web Programming Portfolio</a>
+</header>
+
+<main id="main-content" tabindex="-1">
+    <span class="tag">WEEK 9 · MONDAY</span>
+    <h1>Performance and SEO Report</h1>
+    <p class="intro">
+        I tested my Web Programming portfolio with Google Lighthouse, fixed the problems it found, and tested it again. This report compares my real before-and-after results.
+    </p>
+
+    <section class="card">
+        <h2>Test setup</h2>
+        <ul>
+            <li><strong>Website tested:</strong> <a href="https://fairshare123.github.io/Web_program_week2/">https://fairshare123.github.io/Web_program_week2/</a></li>
+            <li><strong>Page tested:</strong> the portfolio homepage (<code>index.html</code>)</li>
+            <li><strong>Tool:</strong> Lighthouse in Microsoft Edge DevTools</li>
+            <li><strong>Settings:</strong> Navigation mode, Mobile device, all four categories</li>
+            <li><strong>Browser window:</strong> InPrivate, so extensions and saved files did not affect the results</li>
+            <li><strong>Before test:</strong> November 18, 2026, 10:18 AM</li>
+            <li><strong>After test:</strong> November 18, 2026, after uploading the changes to GitHub Pages</li>
+        </ul>
+    </section>
+
+    <section class="card">
+        <h2>Original results</h2>
+        <table>
+            <thead>
+                <tr><th scope="col">Performance</th><th scope="col">Accessibility</th><th scope="col">Best Practices</th><th scope="col">SEO</th></tr>
+            </thead>
+            <tbody>
+                <tr><td class="score">98</td><td class="score">96</td><td class="score">96</td><td class="score">90</td></tr>
+            </tbody>
+        </table>
+
+        <table>
+            <thead>
+                <tr><th scope="col">Metric</th><th scope="col">Before</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>First Contentful Paint (FCP)</td><td>1.2 s</td></tr>
+                <tr><td>Largest Contentful Paint (LCP)</td><td>1.2 s</td></tr>
+                <tr><td>Total Blocking Time (TBT)</td><td>10 ms</td></tr>
+                <tr><td>Cumulative Layout Shift (CLS)</td><td>0</td></tr>
+                <tr><td>Speed Index</td><td>3.7 s (orange)</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Issues found by the audit</h3>
+        <ol>
+            <li><strong>SEO:</strong> "Document does not have a meta description." Search engines had no summary of the page to show in results.</li>
+            <li><strong>Best Practices:</strong> "Browser errors were logged to the console." The browser could not find a favicon (the small tab icon) and logged a 404 error for <code>favicon.ico</code>.</li>
+            <li><strong>Accessibility:</strong> "Document does not have a main landmark." This one is explained in my Week 9 Friday accessibility task.</li>
+            <li><strong>Performance:</strong> Speed Index was 3.7 s, the only metric not in the green range.</li>
+        </ol>
+
+        <figure>
+            <img src="screenshots/before-scores.png" alt="Lighthouse before: Performance 98, Accessibility 96, Best Practices 96, SEO 90">
+            <figcaption>Before: the four Lighthouse scores.</figcaption>
+        </figure>
+        <figure>
+            <img src="screenshots/before-metrics.png" alt="Lighthouse before metrics: FCP 1.2 s, LCP 1.2 s, TBT 10 ms, CLS 0, Speed Index 3.7 s" loading="lazy">
+            <figcaption>Before: performance metrics.</figcaption>
+        </figure>
+        <figure>
+            <img src="screenshots/before-seo.png" alt="Lighthouse SEO warning: Document does not have a meta description" loading="lazy">
+            <figcaption>Before: the SEO issue.</figcaption>
+        </figure>
+        <figure>
+            <img src="screenshots/before-console.png" alt="Browser console error: failed to load favicon.ico with status 404" loading="lazy">
+            <figcaption>Before: the favicon error in the browser console.</figcaption>
+        </figure>
+    </section>
+
+    <section class="card">
+        <h2>Changes made</h2>
+        <ol>
+            <li>
+                <strong>Added a meta description and author</strong> in the <code>&lt;head&gt;</code> of <code>index.html</code>, so search engines can describe my page.
+<pre><code>&lt;meta name=&quot;description&quot; content=&quot;Dipika Aryal&#x27;s Web Programming portfolio: weekly HTML, CSS and JavaScript assignments, API projects, forms and accessibility work.&quot;&gt;
+&lt;meta name=&quot;author&quot; content=&quot;Dipika Aryal&quot;&gt;</code></pre>
+            </li>
+            <li>
+                <strong>Added a favicon</strong> (a small "DA" icon) written directly inside the HTML as an SVG. This removes the 404 console error, and the browser does not need to download a separate icon file.
+<pre><code>&lt;link rel=&quot;icon&quot; href=&quot;data:image/svg+xml,...&quot;&gt;</code></pre>
+            </li>
+            <li>
+                <strong>Added a theme colour</strong> so mobile browsers colour their address bar to match my teal theme.
+<pre><code>&lt;meta name=&quot;theme-color&quot; content=&quot;#0f766e&quot;&gt;</code></pre>
+            </li>
+            <li><strong>Accessibility changes</strong>, including the missing main landmark, are explained in the <a href="accessibility-task.html">Week 9 Friday accessibility task</a>.</li>
+        </ol>
+    </section>
+
+    <section class="card">
+        <h2>After results</h2>
+        <table>
+            <thead>
+                <tr><th scope="col">Category</th><th scope="col">Before</th><th scope="col">After</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Performance</td><td>98</td><td class="better">100</td></tr>
+                <tr><td>Accessibility</td><td>96</td><td class="better">100</td></tr>
+                <tr><td>Best Practices</td><td>96</td><td class="better">100</td></tr>
+                <tr><td>SEO</td><td>90</td><td class="better">100</td></tr>
+            </tbody>
+        </table>
+
+        <table>
+            <thead>
+                <tr><th scope="col">Metric</th><th scope="col">Before</th><th scope="col">After</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>First Contentful Paint (FCP)</td><td>1.2 s</td><td>0.9 s</td></tr>
+                <tr><td>Largest Contentful Paint (LCP)</td><td>1.2 s</td><td>0.9 s</td></tr>
+                <tr><td>Total Blocking Time (TBT)</td><td>10 ms</td><td>60 ms</td></tr>
+                <tr><td>Cumulative Layout Shift (CLS)</td><td>0</td><td>0</td></tr>
+                <tr><td>Speed Index</td><td>3.7 s</td><td>0.9 s</td></tr>
+            </tbody>
+        </table>
+
+        <figure>
+            <img src="screenshots/after-scores.png" alt="Lighthouse after: Performance 100, Accessibility 100, Best Practices 100, SEO 100" loading="lazy">
+            <figcaption>After: all four scores are 100.</figcaption>
+        </figure>
+        <figure>
+            <img src="screenshots/after-metrics.png" alt="Lighthouse after metrics: FCP 0.9 s, LCP 0.9 s, TBT 60 ms, CLS 0, Speed Index 0.9 s" loading="lazy">
+            <figcaption>After: performance metrics.</figcaption>
+        </figure>
+    </section>
+
+    <section class="card">
+        <h2>Reflection</h2>
+        <p>
+            The clearest improvements came from small fixes in the <code>&lt;head&gt;</code>. Adding a meta description raised SEO from 90 to 100,
+            and adding a favicon removed the console error, which raised Best Practices from 96 to 100.
+        </p>
+        <p>
+            My page was already fast, because it has no images, external fonts or large scripts. I did not make a change aimed only at speed,
+            so I think most of the Speed Index change (3.7 s to 0.9 s) is normal variation between Lighthouse runs, which Lighthouse itself warns about.
+            Total Blocking Time went up slightly (10 ms to 60 ms) but is still in the green range. Next time, I would run each test several times and compare the average.
+        </p>
+        <p>
+            I learned that Lighthouse is useful for finding quick fixes, but a high score does not mean a site is perfect. I still had to test the
+            keyboard navigation myself, which is covered in my accessibility task.
+        </p>
+    </section>
+
+    <section class="card">
+        <h2>Saved evidence</h2>
+        <ul class="links">
+            <li><a href="screenshots/lighthouse-before.html">Full Lighthouse report — before</a></li>
+            <li><a href="screenshots/lighthouse-after.html">Full Lighthouse report — after</a></li>
+            <li><a href="accessibility-report.html">Website Accessibility Audit Report</a></li>
+        </ul>
+    </section>
+
+    <a class="back-link" href="../index.html">← Back to Portfolio</a>
+</main>
+
+<footer>Week 9 · Monday · Performance and SEO Report</footer>
+
+</body>
+</html>

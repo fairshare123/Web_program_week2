@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Week 9 accessibility task: three accessibility problems found and fixed in Dipika Aryal's Web Programming portfolio, with a keyboard skip-link test.">
+    <meta name="author" content="Dipika Aryal">
+    <meta name="theme-color" content="#0f766e">
+    <title>Week 9 Friday | Accessibility Task</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f766e'/%3E%3Ctext x='16' y='22' font-size='16' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EDA%3C/text%3E%3C/svg%3E">
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f0fdfa;
+            color: #23413e;
+            line-height: 1.6;
+        }
+
+        header, footer {
+            background: white;
+            padding: 18px 7%;
+            border-bottom: 1px solid #d5eeea;
+        }
+
+        a {
+            color: #0f766e;
+            font-weight: bold;
+        }
+
+        a:hover { color: #134e4a; }
+
+        a:focus-visible {
+            outline: 3px solid #eab308;
+            outline-offset: 3px;
+        }
+
+        header a, .back-link { text-decoration: none; }
+
+        .skip-link {
+            position: absolute;
+            left: 16px;
+            top: -60px;
+            z-index: 100;
+            background: #134e4a;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .skip-link:focus { top: 12px; }
+
+        main {
+            max-width: 850px;
+            width: 92%;
+            margin: 35px auto;
+        }
+
+        main:focus { outline: none; }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #ccfbf1;
+            color: #134e4a;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        h1, h2, h3 { color: #134e4a; }
+
+        h3 { margin-bottom: 4px; }
+
+        .intro { color: #4b5f5c; }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 17px;
+            border: 1px solid #d5eeea;
+            box-shadow: 0 8px 24px #0f766e0f;
+            margin-top: 25px;
+        }
+
+        .card h2 { margin-top: 0; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px 12px;
+            border-bottom: 1px solid #d5eeea;
+        }
+
+        th {
+            background: #f0fdfa;
+            color: #134e4a;
+        }
+
+        .better { color: #047857; font-weight: bold; }
+
+        .score {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #0f766e;
+        }
+
+        pre {
+            background: #134e4a;
+            color: #ecfdf5;
+            padding: 14px 16px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+
+        code { font-family: Consolas, monospace; }
+
+        :not(pre) > code {
+            background: #f0fdfa;
+            padding: 2px 6px;
+            border-radius: 5px;
+        }
+
+        figure { margin: 18px 0; }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 1px solid #d5eeea;
+        }
+
+        figcaption {
+            font-size: 0.9rem;
+            color: #4b5f5c;
+            margin-top: 6px;
+        }
+
+        .links {
+            display: grid;
+            gap: 10px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .links a {
+            display: block;
+            padding: 13px 16px;
+            background: #f0fdfa;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+        .links a:hover { background: #ccfbf1; }
+
+        .back-link {
+            display: inline-block;
+            margin: 25px 0;
+        }
+
+        footer {
+            text-align: center;
+            color: #4b5f5c;
+            border-top: 1px solid #d5eeea;
+        }
+
+        @media (max-width: 600px) {
+            .card { padding: 18px; }
+            th, td { padding: 8px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header>
+    <a href="../index.html">← My Web Programming Portfolio</a>
+</header>
+
+<main id="main-content" tabindex="-1">
+    <span class="tag">WEEK 9 · FRIDAY</span>
+    <h1>Accessibility Task</h1>
+    <p class="intro">
+        I found and fixed three accessibility problems on my portfolio homepage. One was found by Lighthouse and two were found by testing the page with only my keyboard.
+    </p>
+
+    <section class="card">
+        <h2>Three problems and how I fixed them</h2>
+
+        <h3>1. No main landmark</h3>
+        <p><strong>What was wrong:</strong> Lighthouse reported "Document does not have a main landmark." Screen reader users use landmarks to jump straight to the main content, but my page had no <code>&lt;main&gt;</code> element.</p>
+        <p><strong>What I changed:</strong> I wrapped the introduction and the weekly assignments in a <code>&lt;main&gt;</code> element. The navigation and footer stay outside it.</p>
+<pre><code>&lt;main id=&quot;main-content&quot; tabindex=&quot;-1&quot;&gt;
+    &lt;!-- hero section and weekly assignments --&gt;
+&lt;/main&gt;</code></pre>
+
+        <h3>2. "Back to Weeks" did not work with a keyboard</h3>
+        <p><strong>What was wrong:</strong> "← Back to Weeks" was a <code>&lt;div&gt;</code> with an <code>onclick</code>. A div cannot be reached with the Tab key, so keyboard users could not use it.</p>
+        <p><strong>What I changed:</strong> I changed every one of them to a real <code>&lt;button&gt;</code> element. Buttons can be reached with Tab and pressed with Enter or Space. CSS keeps the same look.</p>
+<pre><code>&lt;!-- Before --&gt;
+&lt;div class=&quot;back&quot; onclick=&quot;hideWeeks()&quot;&gt;← Back to Weeks&lt;/div&gt;
+
+&lt;!-- After --&gt;
+&lt;button type=&quot;button&quot; class=&quot;back&quot; onclick=&quot;hideWeeks()&quot;&gt;← Back to Weeks&lt;/button&gt;</code></pre>
+
+        <h3>3. Keyboard focus got lost when opening a week</h3>
+        <p><strong>What was wrong:</strong> When I opened a week with the keyboard, the page scrolled down to the tasks, but the keyboard focus stayed on the card at the top. Screen readers were also not told whether a week was open.</p>
+        <p><strong>What I changed:</strong> My JavaScript now moves focus to the opened week's heading, and "Back to Weeks" returns focus to the card I opened. Each week card also has <code>aria-expanded</code>, which tells screen readers whether its tasks are open.</p>
+<pre><code>&lt;button class=&quot;week-button&quot; onclick=&quot;showWeek(&#x27;week7&#x27;)&quot;
+        aria-controls=&quot;week7&quot; aria-expanded=&quot;false&quot;&gt;
+
+// in showWeek(): move focus to the opened week&#x27;s heading
+const heading = selectedWeek.querySelector(&quot;h2&quot;);
+heading.setAttribute(&quot;tabindex&quot;, &quot;-1&quot;);
+heading.focus({ preventScroll: true });</code></pre>
+
+        <p>After these fixes, the Lighthouse accessibility score went from <strong>96</strong> to <strong>100</strong>.</p>
+    </section>
+
+    <section class="card">
+        <h2>Skip-to-content test</h2>
+        <p>I also added a "Skip to main content" link. It is hidden until a keyboard user presses Tab, so it does not change the design.</p>
+<pre><code>&lt;a class=&quot;skip-link&quot; href=&quot;#main-content&quot;&gt;Skip to main content&lt;/a&gt;</code></pre>
+        <p><strong>How I tested it</strong> on the live site in Microsoft Edge on November 18, 2026:</p>
+        <ol>
+            <li>Opened the homepage and pressed <strong>Tab</strong> once. The "Skip to main content" link appeared at the top left.</li>
+            <li>Pressed <strong>Enter</strong>. The page jumped past the navigation to the main content, and the address changed to end with <code>#main-content</code>.</li>
+            <li>Kept pressing Tab to open Week 7, move through its tasks and press "Back to Weeks." Every step worked without a mouse.</li>
+        </ol>
+        <p>I did not test with a screen reader, so this test covers keyboard use only.</p>
+        <figure>
+            <img src="screenshots/skip-link-test.png" alt="The Skip to main content link visible at the top left of the portfolio after pressing Tab" loading="lazy">
+            <figcaption>The skip link appears after pressing Tab once.</figcaption>
+        </figure>
+    </section>
+
+    <section class="card">
+        <h2>Report and evidence</h2>
+        <ul class="links">
+            <li><a href="accessibility-report.html">Website Accessibility Audit Report</a></li>
+            <li><a href="screenshots/before-accessibility.png">Screenshot — accessibility before (96)</a></li>
+            <li><a href="screenshots/after-accessibility.png">Screenshot — accessibility after (100)</a></li>
+            <li><a href="updatedwebsite.html">Updated Website</a></li>
+        </ul>
+    </section>
+
+    <a class="back-link" href="../index.html">← Back to Portfolio</a>
+</main>
+
+<footer>Week 9 · Friday · Accessibility Task</footer>
+
+</body>
+</html>

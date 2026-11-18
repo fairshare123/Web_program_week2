@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Accessibility audit of Dipika Aryal's Web Programming portfolio: Lighthouse score from 96 to 100, three fixes, and a keyboard test.">
+    <meta name="author" content="Dipika Aryal">
+    <meta name="theme-color" content="#0f766e">
+    <title>Week 9 | Website Accessibility Audit Report</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f766e'/%3E%3Ctext x='16' y='22' font-size='16' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EDA%3C/text%3E%3C/svg%3E">
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f0fdfa;
+            color: #23413e;
+            line-height: 1.6;
+        }
+
+        header, footer {
+            background: white;
+            padding: 18px 7%;
+            border-bottom: 1px solid #d5eeea;
+        }
+
+        a {
+            color: #0f766e;
+            font-weight: bold;
+        }
+
+        a:hover { color: #134e4a; }
+
+        a:focus-visible {
+            outline: 3px solid #eab308;
+            outline-offset: 3px;
+        }
+
+        header a, .back-link { text-decoration: none; }
+
+        .skip-link {
+            position: absolute;
+            left: 16px;
+            top: -60px;
+            z-index: 100;
+            background: #134e4a;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .skip-link:focus { top: 12px; }
+
+        main {
+            max-width: 850px;
+            width: 92%;
+            margin: 35px auto;
+        }
+
+        main:focus { outline: none; }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #ccfbf1;
+            color: #134e4a;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        h1, h2, h3 { color: #134e4a; }
+
+        h3 { margin-bottom: 4px; }
+
+        .intro { color: #4b5f5c; }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 17px;
+            border: 1px solid #d5eeea;
+            box-shadow: 0 8px 24px #0f766e0f;
+            margin-top: 25px;
+        }
+
+        .card h2 { margin-top: 0; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px 12px;
+            border-bottom: 1px solid #d5eeea;
+        }
+
+        th {
+            background: #f0fdfa;
+            color: #134e4a;
+        }
+
+        .better { color: #047857; font-weight: bold; }
+
+        .score {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #0f766e;
+        }
+
+        pre {
+            background: #134e4a;
+            color: #ecfdf5;
+            padding: 14px 16px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+
+        code { font-family: Consolas, monospace; }
+
+        :not(pre) > code {
+            background: #f0fdfa;
+            padding: 2px 6px;
+            border-radius: 5px;
+        }
+
+        figure { margin: 18px 0; }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 1px solid #d5eeea;
+        }
+
+        figcaption {
+            font-size: 0.9rem;
+            color: #4b5f5c;
+            margin-top: 6px;
+        }
+
+        .links {
+            display: grid;
+            gap: 10px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .links a {
+            display: block;
+            padding: 13px 16px;
+            background: #f0fdfa;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+        .links a:hover { background: #ccfbf1; }
+
+        .back-link {
+            display: inline-block;
+            margin: 25px 0;
+        }
+
+        footer {
+            text-align: center;
+            color: #4b5f5c;
+            border-top: 1px solid #d5eeea;
+        }
+
+        @media (max-width: 600px) {
+            .card { padding: 18px; }
+            th, td { padding: 8px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header>
+    <a href="../index.html">← My Web Programming Portfolio</a>
+</header>
+
+<main id="main-content" tabindex="-1">
+    <span class="tag">WEEK 9</span>
+    <h1>Website Accessibility Audit Report</h1>
+    <p class="intro">
+        This report explains how I checked my portfolio for accessibility problems, what I fixed, and how the result changed.
+    </p>
+
+    <section class="card">
+        <h2>Purpose of the audit</h2>
+        <p>
+            An accessible website can be used by everyone, including people who use only a keyboard or a screen reader.
+            I audited the homepage of my portfolio (<a href="https://fairshare123.github.io/Web_program_week2/">https://fairshare123.github.io/Web_program_week2/</a>) with Lighthouse in Microsoft Edge
+            (Navigation mode, Mobile) and by testing it with only my keyboard. I used the same page and settings before and after the changes.
+        </p>
+    </section>
+
+    <section class="card">
+        <h2>Original score</h2>
+        <p class="score">96 / 100</p>
+        <p>Lighthouse found one failed check: "Document does not have a main landmark."</p>
+        <figure>
+            <img src="screenshots/before-accessibility.png" alt="Lighthouse accessibility score 96 with the warning Document does not have a main landmark">
+            <figcaption>Before: accessibility score 96 and the failed check.</figcaption>
+        </figure>
+    </section>
+
+    <section class="card">
+        <h2>Three accessibility fixes</h2>
+        <ol>
+            <li><strong>Added a main landmark.</strong> The main content is now inside <code>&lt;main id="main-content"&gt;</code>, so screen reader users can jump straight to it.</li>
+            <li><strong>Made "Back to Weeks" keyboard accessible.</strong> It was a <code>&lt;div&gt;</code> that only worked with a mouse. It is now a <code>&lt;button&gt;</code>.</li>
+            <li><strong>Kept keyboard focus in the right place.</strong> Opening a week moves focus to its tasks, going back returns focus to the card, and <code>aria-expanded</code> tells screen readers whether a week is open.</li>
+        </ol>
+        <p>
+            Lighthouse only detected the first problem. I found the other two by testing the page with my keyboard,
+            because automatic tools cannot catch every accessibility problem. Full details and code are in my
+            <a href="accessibility-task.html">accessibility task</a>.
+        </p>
+    </section>
+
+    <section class="card">
+        <h2>Final score</h2>
+        <p class="score">100 / 100</p>
+        <figure>
+            <img src="screenshots/after-accessibility.png" alt="Lighthouse accessibility score 100 after the fixes" loading="lazy">
+            <figcaption>After: accessibility score 100.</figcaption>
+        </figure>
+    </section>
+
+    <section class="card">
+        <h2>Keyboard test</h2>
+        <p>
+            On the live site I pressed Tab once and the "Skip to main content" link appeared. Pressing Enter moved me to the main content.
+            I could then open a week, move through its tasks and press "Back to Weeks" using only the keyboard.
+        </p>
+        <figure>
+            <img src="screenshots/skip-link-test.png" alt="The Skip to main content link visible after pressing Tab" loading="lazy">
+            <figcaption>The skip link appears after pressing Tab once.</figcaption>
+        </figure>
+    </section>
+
+    <section class="card">
+        <h2>Conclusion</h2>
+        <p>
+            My accessibility score went from 96 to 100 using the same page and settings. The biggest lesson was that Lighthouse
+            only finds some problems: two of my three fixes came from testing with my keyboard. I will add a skip link,
+            a <code>&lt;main&gt;</code> landmark and real buttons to my future pages from the start.
+        </p>
+    </section>
+
+    <a class="back-link" href="../index.html">← Back to Portfolio</a>
+</main>
+
+<footer>Week 9 · Website Accessibility Audit Report</footer>
+
+</body>
+</html>
