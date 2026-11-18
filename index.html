@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dipika Aryal's Web Programming portfolio: weekly HTML, CSS and JavaScript assignments, API projects, forms and accessibility work.">
+    <meta name="author" content="Dipika Aryal">
+    <meta name="theme-color" content="#0f766e">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f766e'/%3E%3Ctext x='16' y='22' font-size='16' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EDA%3C/text%3E%3C/svg%3E">
 
     <title>Dipika Aryal | Web Development</title>
 
@@ -203,11 +207,46 @@
             color: #0f766e;
             cursor: pointer;
             font-weight: bold;
+            border: none;
+            background: none;
+            padding: 0;
+            font-family: inherit;
+            font-size: 1rem;
         }
 
         .back:hover {
             color: #134e4a;
             text-decoration: underline;
+        }
+
+        /* ACCESSIBILITY */
+
+        .skip-link {
+            position: absolute;
+            left: 16px;
+            top: -60px;
+            z-index: 100;
+            background: #134e4a;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .skip-link:focus {
+            top: 12px;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid #eab308;
+            outline-offset: 3px;
+        }
+
+        main:focus,
+        .task-section h2:focus {
+            outline: none;
         }
 
         /* FOOTER */
@@ -275,9 +314,11 @@
 
 <body>
 
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
     <!-- NAVIGATION -->
 
-    <nav>
+    <nav aria-label="Main navigation">
         <div class="logo">Dipika's Portfolio</div>
 
         <div>
@@ -286,6 +327,10 @@
         </div>
     </nav>
 
+
+    <!-- MAIN CONTENT -->
+
+    <main id="main-content" tabindex="-1">
 
     <!-- HERO -->
 
@@ -320,7 +365,7 @@
 
         <div class="weeks">
 
-            <button class="week-button" onclick="showWeek('week2')">
+            <button class="week-button" onclick="showWeek('week2')" aria-controls="week2" aria-expanded="false">
                 <span class="week-code">W02</span>
                 <span class="week-name">Week 2</span>
                 <span class="week-description">
@@ -331,7 +376,7 @@
                 </span>
             </button>
 
-            <button class="week-button" onclick="showWeek('week3')">
+            <button class="week-button" onclick="showWeek('week3')" aria-controls="week3" aria-expanded="false">
                 <span class="week-code">W03</span>
                 <span class="week-name">Week 3</span>
                 <span class="week-description">
@@ -342,7 +387,7 @@
                 </span>
             </button>
 
-            <button class="week-button" onclick="showWeek('week4')">
+            <button class="week-button" onclick="showWeek('week4')" aria-controls="week4" aria-expanded="false">
                 <span class="week-code">W04</span>
                 <span class="week-name">Week 4</span>
                 <span class="week-description">
@@ -353,7 +398,7 @@
                 </span>
             </button>
 
-            <button class="week-button" onclick="showWeek('week5')">
+            <button class="week-button" onclick="showWeek('week5')" aria-controls="week5" aria-expanded="false">
                 <span class="week-code">W05</span>
                 <span class="week-name">Week 5</span>
                 <span class="week-description">
@@ -364,7 +409,7 @@
                 </span>
             </button>
 
-            <button class="week-button" onclick="showWeek('week6')">
+            <button class="week-button" onclick="showWeek('week6')" aria-controls="week6" aria-expanded="false">
                 <span class="week-code">W06</span>
                 <span class="week-name">Week 6</span>
                 <span class="week-description">
@@ -375,7 +420,7 @@
                 </span>
             </button>
 
-            <button class="week-button" onclick="showWeek('week7')">
+            <button class="week-button" onclick="showWeek('week7')" aria-controls="week7" aria-expanded="false">
     <span class="week-code">W07</span>
     <span class="week-name">Week 7</span>
     <span class="week-description">
@@ -387,12 +432,24 @@
     </span>
 </button>
             
-            <button class="week-button" onclick="showWeek('week8')">
+            <button class="week-button" onclick="showWeek('week8')" aria-controls="week8" aria-expanded="false">
                 <span class="week-code">W08</span>
                 <span class="week-name">Week 8</span>
                 <span class="week-description">
                     Student registration forms, HTML validation,
                     and interactive JavaScript form feedback.
+                </span>
+                <span class="open-week">
+                    Open week <span>→</span>
+                </span>
+            </button>
+
+            <button class="week-button" onclick="showWeek('week9')" aria-controls="week9" aria-expanded="false">
+                <span class="week-code">W09</span>
+                <span class="week-name">Week 9</span>
+                <span class="week-description">
+                    Lighthouse performance, SEO and accessibility
+                    audits with before-and-after results.
                 </span>
                 <span class="open-week">
                     Open week <span>→</span>
@@ -419,9 +476,9 @@
                 <a class="task" href="week2/task8.html">Task 8</a>
             </div>
 
-            <div class="back" onclick="hideWeeks()">
+            <button type="button" class="back" onclick="hideWeeks()">
                 ← Back to Weeks
-            </div>
+            </button>
 
         </div>
 
@@ -479,9 +536,9 @@
 
             </div>
 
-            <div class="back" onclick="hideWeeks()">
+            <button type="button" class="back" onclick="hideWeeks()">
                 ← Back to Weeks
-            </div>
+            </button>
 
         </div>
 
@@ -499,9 +556,9 @@
                 <a class="task" href="week4/task4.html">Task 4</a>
             </div>
 
-            <div class="back" onclick="hideWeeks()">
+            <button type="button" class="back" onclick="hideWeeks()">
                 ← Back to Weeks
-            </div>
+            </button>
 
         </div>
 
@@ -524,9 +581,9 @@
 
             </div>
 
-            <div class="back" onclick="hideWeeks()">
+            <button type="button" class="back" onclick="hideWeeks()">
                 ← Back to Weeks
-            </div>
+            </button>
 
         </div>
 
@@ -549,23 +606,35 @@
 
             </div>
 
-            <div class="back" onclick="hideWeeks()">
+            <button type="button" class="back" onclick="hideWeeks()">
                 ← Back to Weeks
-            </div>
+            </button>
 
         </div>
 
-<div class="tasks">
-    <a class="task" href="Week%207/task1.html">Task 1 — Basic Book Search</a>
-    <a class="task" href="Week%207/task2.html">Task 2 — Open Library API</a>
-    <a class="task" href="Week%207/task3.html">Task 3 — Search Controls</a>
-    <a class="task" href="Week%207/task4.html">Task 4 — Loading and Errors</a>
-    <a class="task" href="Week%207/task5.html">Task 5 — Enhanced Search</a>
-    <a class="task" href="Week%207/task6.html">Task 6 — Sorting and Pagination</a>
-    <a class="task" href="Week%207/task7.html">Task 7 — Advanced Search</a>
-</div>
-    </div>
-        
+        <!-- WEEK 7 TASKS -->
+
+        <div class="task-section" id="week7">
+
+            <h2>Week 7 Tasks</h2>
+
+            <div class="tasks">
+                <a class="task" href="Week%207/task1.html">Task 1 — Basic Book Search</a>
+                <a class="task" href="Week%207/task2.html">Task 2 — Open Library API</a>
+                <a class="task" href="Week%207/task3.html">Task 3 — Search Controls</a>
+                <a class="task" href="Week%207/task4.html">Task 4 — Loading and Errors</a>
+                <a class="task" href="Week%207/task5.html">Task 5 — Enhanced Search</a>
+                <a class="task" href="Week%207/task6.html">Task 6 — Sorting and Pagination</a>
+                <a class="task" href="Week%207/task7.html">Task 7 — Advanced Search</a>
+            </div>
+
+            <button type="button" class="back" onclick="hideWeeks()">
+                ← Back to Weeks
+            </button>
+
+        </div>
+
+
         <!-- WEEK 8 TASKS -->
 
         <div class="task-section" id="week8">
@@ -584,13 +653,35 @@
 
             </div>
 
-            <div class="back" onclick="hideWeeks()">
+            <button type="button" class="back" onclick="hideWeeks()">
                 ← Back to Weeks
+            </button>
+
+        </div>
+
+
+        <!-- WEEK 9 TASKS -->
+
+        <div class="task-section" id="week9">
+
+            <h2>Week 9 Tasks</h2>
+
+            <div class="tasks">
+                <a class="task" href="Week9/updated_performance.html">Monday — Performance and SEO Report</a>
+                <a class="task" href="Week9/accessibility-task.html">Friday — Accessibility Task</a>
+                <a class="task" href="Week9/updatedwebsite.html">Updated Website</a>
+                <a class="task" href="Week9/accessibility-report.html">Website Accessibility Audit Report</a>
             </div>
+
+            <button type="button" class="back" onclick="hideWeeks()">
+                ← Back to Weeks
+            </button>
 
         </div>
 
     </section>
+
+    </main>
 
 
     <!-- FOOTER -->
@@ -605,6 +696,8 @@
 
     <script>
 
+        let lastWeekButton = null;
+
         function showWeek(week) {
 
             document.querySelectorAll(".task-section").forEach(
@@ -613,10 +706,29 @@
                 }
             );
 
+            document.querySelectorAll(".week-button").forEach(
+                function(button) {
+                    button.setAttribute("aria-expanded", "false");
+                }
+            );
+
             const selectedWeek = document.getElementById(week);
 
             if (selectedWeek) {
                 selectedWeek.style.display = "block";
+
+                lastWeekButton = document.querySelector(
+                    '.week-button[aria-controls="' + week + '"]'
+                );
+
+                if (lastWeekButton) {
+                    lastWeekButton.setAttribute("aria-expanded", "true");
+                }
+
+                // Move keyboard focus to the opened week's heading
+                const heading = selectedWeek.querySelector("h2");
+                heading.setAttribute("tabindex", "-1");
+                heading.focus({ preventScroll: true });
 
                 selectedWeek.scrollIntoView({
                     behavior: "smooth",
@@ -634,10 +746,21 @@
                 }
             );
 
+            document.querySelectorAll(".week-button").forEach(
+                function(button) {
+                    button.setAttribute("aria-expanded", "false");
+                }
+            );
+
             document.getElementById("weeks").scrollIntoView({
                 behavior: "smooth",
                 block: "start"
             });
+
+            // Return keyboard focus to the week card that was opened
+            if (lastWeekButton) {
+                lastWeekButton.focus({ preventScroll: true });
+            }
         }
 
     </script>
